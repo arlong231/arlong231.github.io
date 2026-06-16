@@ -3,23 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>슬기로운 지구시민 — 수업 자료 모음</title>
+<title>SDGs × 중학교 융합 수업</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
 :root {
-  --sdg-blue: #009EDB;
-  --sdg-green: #3F7E44;
-  --sdg-yellow: #FCC30B;
-  --sdg-red: #E5243B;
-  --sdg-orange: #FF6925;
-  --bg: #f5f7fa;
+  --bg: #f8f9fa;
+  --white: #ffffff;
   --text: #1a1a2e;
-  --muted: #5a6478;
-  --card-bg: #ffffff;
-  --radius: 14px;
+  --text-muted: #555;
+  --border: #e0e0e0;
+  --radius: 12px;
+  /* SDG 공식 색상 */
+  --sdg1: #e5243b;   --sdg2: #dda63a;   --sdg3: #4c9f38;
+  --sdg4: #c5192d;   --sdg5: #ff3a21;   --sdg6: #26bde2;
+  --sdg7: #fcc30b;   --sdg8: #a21942;   --sdg9: #fd6925;
+
+  --sdg9: #fd6925;
+  --sdg10: #dd1367;  --sdg11: #fd9d24;  --sdg12: #bf8b2e;
+  --sdg13: #3f7e44;  --sdg14: #0a97d9;  --sdg15: #56c02b;
+  --sdg16: #00689d;  --sdg17: #19486a;
+  --geo-color: #3f7e44;
+  --movie-color: #a21942;
 }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: 'Noto Sans KR', sans-serif;
@@ -28,10 +35,11 @@ body {
   min-height: 100vh;
 }
 
-/* ── 헤더 ── */
+/* HEADER */
 .hero {
-  background: linear-gradient(135deg, #0f2027 0%, #1a3a4a 50%, #0f3460 100%);
-  padding: 52px 24px 44px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: white;
+  padding: 60px 24px 50px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -40,319 +48,1143 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
-.sdg-stripe {
+.sdg-color-bar {
   display: flex;
-  justify-content: center;
-  gap: 5px;
-  margin-bottom: 22px;
-}
-.sdg-dot {
-  width: 12px; height: 12px;
-  border-radius: 50%;
-}
-.hero-label {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 3px;
-  color: var(--sdg-blue);
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-.hero h1 {
-  font-size: 28px;
-  font-weight: 900;
-  color: #fff;
-  line-height: 1.3;
-  margin-bottom: 10px;
-}
-.hero h1 em {
-  color: var(--sdg-yellow);
-  font-style: normal;
-}
-.hero-desc {
-  font-size: 13px;
-  color: rgba(255,255,255,0.65);
-  line-height: 1.8;
-  max-width: 520px;
-  margin: 0 auto 20px;
-}
-.hero-meta {
-  display: inline-flex;
-  gap: 16px;
-  font-size: 11px;
-  color: rgba(255,255,255,0.45);
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 16px;
-}
-.hero-meta span::before { content: '· '; }
-
-/* ── 본문 ── */
-.container {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 36px 20px 60px;
-}
-
-.section-label {
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--muted);
-  text-transform: uppercase;
-  margin-bottom: 16px;
-}
-
-/* ── 카드 그리드 ── */
-.card-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 36px;
-}
-@media (max-width: 520px) {
-  .card-grid { grid-template-columns: 1fr; }
-  .hero h1 { font-size: 22px; }
-}
-
-.card {
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  padding: 20px 18px 18px;
-  text-decoration: none;
-  color: inherit;
-  border: 1.5px solid #e8ecf2;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
-  position: relative;
+  height: 6px;
+  margin-bottom: 32px;
+  border-radius: 3px;
   overflow: hidden;
 }
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--accent, #009EDB);
-}
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.10);
-  border-color: var(--accent, #009EDB);
-}
-.card-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--accent, #009EDB);
-  background: color-mix(in srgb, var(--accent, #009EDB) 10%, white);
-  border-radius: 20px;
-  padding: 3px 9px;
-  width: fit-content;
-}
-.card-emoji { font-size: 22px; line-height: 1; }
-.card-title {
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.4;
-  color: var(--text);
-}
-.card-desc {
-  font-size: 11.5px;
-  color: var(--muted);
-  line-height: 1.65;
+.sdg-color-bar div {
   flex: 1;
 }
-.card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-top: 2px;
-}
-.tag {
-  font-size: 10px;
-  background: #f0f3f8;
-  color: #5a6478;
-  border-radius: 4px;
-  padding: 2px 7px;
-}
-.card-arrow {
-  font-size: 11px;
-  color: var(--accent, #009EDB);
-  font-weight: 700;
-  margin-top: 4px;
-}
-
-/* ── SDGs 연결 박스 ── */
-.sdg-box {
-  background: #fff;
-  border-radius: var(--radius);
-  border: 1.5px solid #e8ecf2;
-  padding: 20px 18px;
-  margin-bottom: 36px;
-}
-.sdg-box-title {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--muted);
+.hero h1 {
+  font-size: clamp(24px, 4vw, 44px);
+  font-weight: 900;
+  line-height: 1.2;
   margin-bottom: 12px;
 }
-.sdg-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(90deg, #fcc30b, #fd9d24, #fd6925);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
-.sdg-chip {
-  font-size: 11px;
+.hero-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,.7);
+  margin-bottom: 24px;
+}
+.hero-tags {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero-tag {
+  font-size: 12px;
   font-weight: 700;
-  color: #fff;
-  border-radius: 6px;
-  padding: 5px 10px;
-  line-height: 1.3;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.3);
+  color: rgba(255,255,255,.85);
 }
 
-/* ── 푸터 ── */
-.footer {
-  text-align: center;
-  font-size: 11px;
-  color: #aab0be;
-  padding-bottom: 30px;
-  line-height: 1.8;
+/* MAIN */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
 }
-.footer a { color: #aab0be; }
+
+.section-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin: 40px 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* OVERVIEW TABLE */
+.overview-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  margin-bottom: 40px;
+}
+.overview-table th {
+  background: #1a1a2e;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 12px 16px;
+  text-align: left;
+  letter-spacing: .5px;
+}
+.overview-table td {
+  padding: 12px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+  line-height: 1.5;
+}
+.overview-table tr:last-child td { border-bottom: none; }
+.overview-table tr:hover td { background: #fafafa; }
+.type-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: white;
+  white-space: nowrap;
+}
+.type-geo   { background: var(--geo-color); }
+.type-movie { background: var(--movie-color); }
+.sdg-pill {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 900;
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: white;
+  margin: 1px;
+}
+.std-code {
+  font-size: 10px;
+  font-family: monospace;
+  background: #e8f4fd;
+  color: #0066cc;
+  padding: 2px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.activity-name {
+  font-weight: 700;
+  color: var(--text);
+}
+.source-small {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* FILTER TABS */
+.tab-bar {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 28px;
+  flex-wrap: wrap;
+}
+.tab-btn {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: 2px solid var(--border);
+  background: var(--white);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all .2s;
+}
+.tab-btn:hover { border-color: #999; color: var(--text); }
+.tab-btn.active { border-color: var(--text); background: var(--text); color: white; }
+.tab-btn.geo.active  { border-color: var(--geo-color);   background: var(--geo-color); }
+.tab-btn.movie.active{ border-color: var(--movie-color); background: var(--movie-color); }
+
+/* LESSON CARDS */
+.lesson-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: box-shadow .2s;
+}
+.lesson-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+.lesson-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 20px 20px 0;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+.lesson-num-col {
+  width: 6px;
+  align-self: stretch;
+  flex-shrink: 0;
+  border-radius: 0 4px 4px 0;
+}
+.lesson-num {
+  font-size: 28px;
+  font-weight: 900;
+  color: #ddd;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+.lesson-info { flex: 1; }
+.lesson-info h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.lesson-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+}
+.chevron {
+  font-size: 20px;
+  color: #bbb;
+  transition: transform .3s;
+  flex-shrink: 0;
+  margin-top: 4px;
+  padding-right: 4px;
+}
+.lesson-card.open .chevron { transform: rotate(180deg); }
+.lesson-body {
+  display: none;
+  padding: 0 20px 24px 42px;
+  border-top: 1px solid #f0f0f0;
+}
+.lesson-card.open .lesson-body { display: block; }
+
+.source-box {
+  background: #f8f9fa;
+  border-left: 3px solid #ccc;
+  border-radius: 0 6px 6px 0;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 16px 0;
+}
+.source-box strong { color: #333; }
+
+.flow-steps { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
+.flow-step { display: flex; gap: 12px; align-items: flex-start; }
+.step-badge {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  margin-top: 1px;
+}
+.step-badge.intro { background: #e3f2fd; color: #1565c0; }
+.step-badge.main  { background: #e8f5e9; color: #2e7d32; }
+.step-badge.wrap  { background: #fff3e0; color: #e65100; }
+.step-content {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #444;
+}
+.step-content strong { color: var(--text); }
+.step-content em { font-style: normal; color: #555; background: #fff8e1; padding: 0 3px; border-radius: 3px; }
+
+/* 세부 성취기준 */
+.achievement-box {
+  background: #f0f4ff;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 12px 0;
+  font-size: 13px;
+}
+.achievement-box .label { font-size: 11px; font-weight: 700; color: #3f5bd1; margin-bottom: 6px; letter-spacing: .5px; }
+.achievement-box .codes { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.achievement-box .desc { color: #333; line-height: 1.6; }
+
+/* UNESCO 연계 */
+.unesco-box {
+  background: #fafafa;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #555;
+}
+.unesco-box .label { font-weight: 700; color: #333; margin-bottom: 6px; }
+.unesco-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+.unesco-tag {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: #eee;
+  color: #444;
+}
+
+/* SDG COLOR MAP */
+.sdg1  { background:#e5243b; } .sdg2  { background:#dda63a; } .sdg3  { background:#4c9f38; }
+.sdg4  { background:#c5192d; } .sdg5  { background:#ff3a21; } .sdg6  { background:#26bde2; }
+.sdg7  { background:#fcc30b; } .sdg8  { background:#a21942; } .sdg9  { background:#fd6925; }
+.sdg10 { background:#dd1367; } .sdg11 { background:#fd9d24; } .sdg12 { background:#bf8b2e; }
+.sdg13 { background:#3f7e44; } .sdg14 { background:#0a97d9; } .sdg15 { background:#56c02b; }
+.sdg16 { background:#00689d; } .sdg17 { background:#19486a; }
+
+.download-bar {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 28px;
+  position: relative;
+}
+.dl-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 22px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+  transition: transform .15s, box-shadow .15s;
+  box-shadow: 0 4px 16px rgba(0,0,0,.3);
+  max-width: 320px;
+}
+.dl-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.4);
+}
+.dl-geo   { background: linear-gradient(135deg, #2e7d32, #43a047); }
+.dl-movie { background: linear-gradient(135deg, #880e4f, #ad1457); }
+.dl-icon  { font-size: 24px; flex-shrink: 0; }
+.dl-text  { display: flex; flex-direction: column; gap: 2px; text-align: left; }
+.dl-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; opacity: .85; text-transform: uppercase; }
+.dl-title { font-size: 13px; font-weight: 700; line-height: 1.3; }
+
+
+.note-box {
+  background: #fff8e1;
+  border-left: 4px solid #f9a825;
+  border-radius: 0 8px 8px 0;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #5d4037;
+  margin-top: 12px;
+  line-height: 1.7;
+}
+.note-box .note-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 1.5px; color: #f9a825; margin-bottom: 5px;
+}
+.achievement-box .ab-note {
+  font-size: 12px; color: #4a148c;
+  margin-top: 8px; padding-top: 8px;
+  border-top: 1px dashed #ce93d8;
+  line-height: 1.7;
+}
+.achievement-box .ab-note strong { color: #6a1b9a; }
+
+.ws-btn-wrap {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  border-radius: 10px;
+}
+.ws-btn-wrap .ws-icon { font-size: 20px; flex-shrink: 0; }
+.ws-btn-wrap .ws-info { flex: 1; }
+.ws-btn-wrap .ws-info .ws-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; color: #15803d; margin-bottom: 2px; }
+.ws-btn-wrap .ws-info .ws-title { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+.ws-btn-wrap a.ws-link {
+  font-size: 12px; font-weight: 700;
+  padding: 7px 16px;
+  background: #16a34a;
+  color: white;
+  border-radius: 7px;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background .2s;
+}
+.ws-btn-wrap a.ws-link:hover { background: #15803d; }
+.hidden { display: none !important; }
+
+.section-header-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  color: white;
+  margin-bottom: 20px;
+  font-weight: 900;
+  font-size: 16px;
+}
+.section-header-bar.geo   { background: var(--geo-color); }
+.section-header-bar.movie { background: var(--movie-color); }
+.section-header-bar span  { font-weight: 400; font-size: 13px; opacity: .85; }
+
+@media (max-width: 600px) {
+  .overview-table { font-size: 12px; }
+  .overview-table th, .overview-table td { padding: 10px 10px; }
+  .lesson-info h3 { font-size: 14px; }
+}
 </style>
 </head>
 <body>
 
-<!-- 헤더 -->
+<!-- HERO -->
 <div class="hero">
-  <div class="sdg-stripe">
-    <div class="sdg-dot" style="background:#E5243B"></div>
-    <div class="sdg-dot" style="background:#DDA63A"></div>
-    <div class="sdg-dot" style="background:#4C9F38"></div>
-    <div class="sdg-dot" style="background:#C5192D"></div>
-    <div class="sdg-dot" style="background:#FF3A21"></div>
-    <div class="sdg-dot" style="background:#26BDE2"></div>
-    <div class="sdg-dot" style="background:#FCC30B"></div>
-    <div class="sdg-dot" style="background:#A21942"></div>
-    <div class="sdg-dot" style="background:#FD6925"></div>
-    <div class="sdg-dot" style="background:#DD1367"></div>
-    <div class="sdg-dot" style="background:#FD9D24"></div>
-    <div class="sdg-dot" style="background:#BF8B2E"></div>
-    <div class="sdg-dot" style="background:#3F7E44"></div>
-    <div class="sdg-dot" style="background:#0A97D9"></div>
-    <div class="sdg-dot" style="background:#56C02B"></div>
-    <div class="sdg-dot" style="background:#00689D"></div>
-    <div class="sdg-dot" style="background:#19486A"></div>
+  <div class="sdg-color-bar">
+    <div style="background:#e5243b"></div><div style="background:#dda63a"></div><div style="background:#4c9f38"></div>
+    <div style="background:#c5192d"></div><div style="background:#ff3a21"></div><div style="background:#26bde2"></div>
+    <div style="background:#fcc30b"></div><div style="background:#a21942"></div><div style="background:#fd6925"></div>
+    <div style="background:#dd1367"></div><div style="background:#fd9d24"></div><div style="background:#bf8b2e"></div>
+    <div style="background:#3f7e44"></div><div style="background:#0a97d9"></div><div style="background:#56c02b"></div>
+    <div style="background:#00689d"></div><div style="background:#19486a"></div>
   </div>
-  <div class="hero-label">내곡중학교 사회·지리 수업 자료</div>
-  <h1>슬기로운 <em>지구시민</em> 수업</h1>
-  <p class="hero-desc">
-    SDGs(지속가능발전목표)와 연결된 중학교 사회·지리 수업 자료입니다.<br>
-    아래 활동지를 클릭해 수업에서 활용하세요.
-  </p>
-  <div class="hero-meta">
-    <span>2022 개정 교육과정</span>
-    <span>중학교 사회·지리</span>
-    <span>SDGs 연계</span>
+  <h1>SDGs × <em>중학교 융합 수업</em></h1>
+  <p class="hero-sub">2022 개정 교육과정 성취기준 연계 · 10개 교수·학습 활동 계획 · 유네스코 세계시민교육 목표 연결</p>
+  <div class="hero-tags">
+    <span class="hero-tag">📚 지리적 상상력으로 세계시민 되기</span>
+    <span class="hero-tag">🎬 영화로 알아보는 세계시민교육</span>
+    <span class="hero-tag">🌐 유네스코 APCEIU</span>
+  </div>
+  <div class="download-bar">
+    <a href="https://www.unescoapceiu.org/post/5210" target="_blank" class="dl-btn dl-geo">
+      <span class="dl-icon">📥</span>
+      <span class="dl-text">
+        <span class="dl-label">원본 자료 내려받기</span>
+        <span class="dl-title">『지리적 상상력으로 세계시민 되기』</span>
+      </span>
+    </a>
+    <a href="https://www.gcedonlinecampus.org/mod/ubboard/article.php?id=10&bwid=4326&lang=ko" target="_blank" class="dl-btn dl-movie">
+      <span class="dl-icon">📥</span>
+      <span class="dl-text">
+        <span class="dl-label">원본 자료 내려받기</span>
+        <span class="dl-title">『영화로 알아보는 세계시민교육(중등)』</span>
+      </span>
+    </a>
   </div>
 </div>
 
-<!-- 본문 -->
 <div class="container">
 
-  <div class="section-label">📂 학생 활동지</div>
+  <!-- 한눈에 보기 연계표 -->
+  <div class="section-title">1부 · 주제별 한눈에 보기 연계표</div>
+  <table class="overview-table">
+    <thead>
+      <tr>
+        <th>유형</th>
+        <th>핵심 주제 (SDGs)</th>
+        <th>관련 성취기준</th>
+        <th>참고 교재 및 출처</th>
+        <th>상세 활동명</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="type-badge type-geo">📍 지리적 상상력</span></td>
+        <td>기후위기와 생태 시민<br><span class="sdg-pill sdg11">SDG 11</span><span class="sdg-pill sdg13">SDG 13</span></td>
+        <td><span class="std-code">[9사(지리)03-02]</span><br><span style="font-size:11px;color:#777">지속가능한 도시 만들기 노력</span></td>
+        <td><span style="font-size:12px">『지리적 상상력』 6,7장 (p.211~276)</span></td>
+        <td class="activity-name">나는 에너지 프로슈머! 에너지 자립 학교</td>
+      </tr>
+      <tr>
+        <td><span class="type-badge type-geo">📍 지리적 상상력</span></td>
+        <td>국제개발협력과 연대<br><span class="sdg-pill sdg1">SDG 1</span><span class="sdg-pill sdg17">SDG 17</span></td>
+        <td><span class="std-code">[9사(지리)04-03]</span><br><span style="font-size:11px;color:#777">아프리카의 노력과 주체들의 협력</span></td>
+        <td><span style="font-size:12px">『지리적 상상력』 8장 (p.289~326)</span></td>
+        <td class="activity-name">지구촌 이웃과 함께 성장하는 프로젝트</td>
+      </tr>
+      <tr>
+        <td><span class="type-badge type-geo">📍 지리적 상상력</span></td>
+        <td>초국적 기업과 지역 변화<br><span class="sdg-pill sdg9">SDG 9</span><span class="sdg-pill sdg10">SDG 10</span><span class="sdg-pill sdg12">SDG 12</span></td>
+        <td><span class="std-code">[9사(지리)05-03]</span><br><span style="font-size:11px;color:#777">초국적 기업 생산체계와 지역 변화</span></td>
+        <td><span style="font-size:12px">『지리적 상상력』 5장 (p.173~210)</span></td>
+        <td class="activity-name">내 운동화는 어디서 만들어졌을까?</td>
+      </tr>
+      <tr>
+        <td><span class="type-badge type-geo">📍 지리적 상상력</span></td>
+        <td>자원과 윤리적 소비<br><span class="sdg-pill sdg2">SDG 2</span><span class="sdg-pill sdg12">SDG 12</span></td>
+        <td><span class="std-code">[9사(지리)12-01]</span><br><span style="font-size:11px;color:#777">자원의 소비 현황과 지속가능한 확보</span></td>
+        <td><span style="font-size:12px">『지리적 상상력』 4장 (p.151~171)</span></td>
+        <td class="activity-name">우리 학교 밥상에서 세계를 보다</td>
+      </tr>
+      <tr>
+        <td><span class="type-badge type-geo">📍 지리적 상상력</span></td>
+        <td>인구 이동과 차별 극복<br><span class="sdg-pill sdg5">SDG 5</span><span class="sdg-pill sdg10">SDG 10</span></td>
+        <td><span class="std-code">[9사(일사)01-03]</span><br><span style="font-size:11px;color:#777">갈등/차별 조사 및 시민의 자질</span></td>
+        <td><span style="font-size:12px">『지리적 상상력』 3장 (p.117~150)</span></td>
+        <td class="activity-name">이주민의 안경을 쓰고 세상 보기</td>
+      </tr>
+      <tr>
+        <td><span class="type-badge type-geo">📍 지리적 상상력</span></td>
+        <td>국제 분쟁과 평화<br><span class="sdg-pill sdg16">SDG 16</span></td>
+        <td><span class="std-code">[9사(일사)11-02]</span><br><span style="font-size:11px;color:#777">분쟁 조사 및 세계 시민의 역할</span></td>
+        <td><span style="font-size:12px">『지리적 상상력』 2장 (p.83~102)</span></td>
+        <td class="activity-name">그림책으로 그리는 평화로운 국경선</td>
+      </tr>
+      <tr>
+        <td><span class="type-badge type-movie">🎬 영화</span></td>
+        <td>자원 문제와 윤리적 소비<br><span class="sdg-pill sdg2">SDG 2</span><span class="sdg-pill sdg12">SDG 12</span></td>
+        <td><span class="std-code">[9사(지리)12-01]</span><br><span style="font-size:11px;color:#777">식량/에너지 문제와 확보 방안</span></td>
+        <td><span style="font-size:12px">『영화로 알아보는』 (p.75~85)</span></td>
+        <td class="activity-name">영화 &lt;모따이나이 키친&gt;과 식탁 위 3R</td>
+      </tr>
+      <tr>
+        <td><span class="type-badge type-movie">🎬 영화</span></td>
+        <td>기후위기와 생태전환<br><span class="sdg-pill sdg11">SDG 11</span><span class="sdg-pill sdg12">SDG 12</span><span class="sdg-pill sdg13">SDG 13</span></td>
+        <td><span class="std-code">[9사(지리)12-02]</span><br><span style="font-size:11px;color:#777">글로컬 환경 이슈와 웰빙 참여</span></td>
+        <td><span style="font-size:12px">『영화로 알아보는』 (p.25~35)</span></td>
+        <td class="activity-name">영화 &lt;내일&gt;과 슬기로운 지구시민</td>
+      </tr>
+      <tr>
+        <td><span class="type-badge type-movie">🎬 영화</span></td>
+        <td>불평등과 노동 문제<br><span class="sdg-pill sdg8">SDG 8</span><span class="sdg-pill sdg10">SDG 10</span></td>
+        <td><span class="std-code">[9사(일사)12-02]</span><br><span style="font-size:11px;color:#777">사회 불평등과 노동 문제의 영향</span></td>
+        <td><span style="font-size:12px">『영화로 알아보는』 (카트 p.49~59 / 모던타임즈 p.1~11)</span></td>
+        <td class="activity-name">영화 &lt;카트&gt;, &lt;모던 타임즈&gt; 공생의 일자리</td>
+      </tr>
+      <tr>
+        <td><span class="type-badge type-movie">🎬 영화</span></td>
+        <td>환경 파괴와 공존의 길<br><span class="sdg-pill sdg13">SDG 13</span><span class="sdg-pill sdg15">SDG 15</span></td>
+        <td><span class="std-code">[9사(일사)12-03]</span><br><span style="font-size:11px;color:#777">사회문제 대응 시민 태도와 실천</span></td>
+        <td><span style="font-size:12px">『영화로 알아보는』 (p.37~47)</span></td>
+        <td class="activity-name">영화 &lt;나우시카&gt;와 행복한 불편 챌린지</td>
+      </tr>
+    </tbody>
+  </table>
 
-  <div class="card-grid">
 
-    <!-- 에너지 프로슈머 -->
-    <a class="card" href="energy/" style="--accent:#FF6925">
-      <div class="card-badge">⚡ SDG 7</div>
-      <div class="card-emoji">🔋</div>
-      <div class="card-title">에너지 프로슈머와<br>지속가능한 에너지</div>
-      <div class="card-desc">태양광·풍력 에너지의 생산자이자 소비자, 프로슈머 개념을 탐구합니다. 실제 사례와 기사를 통해 에너지 전환의 의미를 이해해봐요.</div>
-      <div class="card-tags">
-        <span class="tag">에너지전환</span>
-        <span class="tag">재생에너지</span>
-        <span class="tag">프로슈머</span>
-      </div>
-      <div class="card-arrow">활동지 열기 →</div>
-    </a>
+  <div class="section-title">2부 · 10개 상세 교수·학습 활동 계획 (중학교 맞춤형)</div>
 
-    <!-- 지구촌 프로젝트 -->
-    <a class="card" href="africa/" style="--accent:#3F7E44">
-      <div class="card-badge">🌍 SDG 17</div>
-      <div class="card-emoji">🤝</div>
-      <div class="card-title">지구촌 이웃과 함께<br>성장하는 프로젝트</div>
-      <div class="card-desc">아프리카의 도전과 성장을 탐구하고, 국제개발협력의 의미를 배웁니다. 모둠이 함께 개발협력 프로젝트를 기획해봐요.</div>
-      <div class="card-tags">
-        <span class="tag">국제개발협력</span>
-        <span class="tag">아프리카</span>
-        <span class="tag">세계시민</span>
-      </div>
-      <div class="card-arrow">활동지 열기 →</div>
-    </a>
-
-    <!-- 슬기로운 지구시민 -->
-    <a class="card" href="citizen/" style="--accent:#009EDB">
-      <div class="card-badge">🌐 SDG 11·13</div>
-      <div class="card-emoji">🌱</div>
-      <div class="card-title">슬기로운 지구시민<br>프로젝트</div>
-      <div class="card-desc">기후변화와 지속가능한 도시를 주제로 내가 살고 있는 지역에서 실천할 수 있는 지구시민 행동을 탐구합니다.</div>
-      <div class="card-tags">
-        <span class="tag">기후행동</span>
-        <span class="tag">지속가능도시</span>
-        <span class="tag">지역문제</span>
-      </div>
-      <div class="card-arrow">활동지 열기 →</div>
-    </a>
-
-    <!-- SDGs 융합수업 -->
-    <a class="card" href="sdgs/" style="--accent:#FCC30B">
-      <div class="card-badge">🎯 SDGs 전체</div>
-      <div class="card-emoji">📊</div>
-      <div class="card-title">SDGs 융합수업<br>성취기준 연계 자료</div>
-      <div class="card-desc">17개 SDGs와 2022 개정 교육과정 중학교 성취기준을 연결한 융합수업 자료입니다. 교사·학생 모두 활용 가능합니다.</div>
-      <div class="card-tags">
-        <span class="tag">SDGs 17개</span>
-        <span class="tag">성취기준연계</span>
-        <span class="tag">융합수업</span>
-      </div>
-      <div class="card-arrow">자료 열기 →</div>
-    </a>
-
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="filter('all',this)">전체 보기 (10)</button>
+    <button class="tab-btn geo"   onclick="filter('geo',this)">📍 지리적 상상력 (6)</button>
+    <button class="tab-btn movie" onclick="filter('movie',this)">🎬 영화 수업 (4)</button>
   </div>
 
-  <!-- SDGs 연결 -->
-  <div class="section-label">🎯 이 수업과 연결된 SDGs</div>
-  <div class="sdg-box">
-    <div class="sdg-box-title">수업에서 다루는 지속가능발전목표 (SDGs)</div>
-    <div class="sdg-chips">
-      <span class="sdg-chip" style="background:#DDA63A">SDG 2 기아종식</span>
-      <span class="sdg-chip" style="background:#4C9F38">SDG 3 건강과 웰빙</span>
-      <span class="sdg-chip" style="background:#C5192D">SDG 4 양질의 교육</span>
-      <span class="sdg-chip" style="background:#FF3A21">SDG 7 깨끗한 에너지</span>
-      <span class="sdg-chip" style="background:#A21942">SDG 10 불평등 감소</span>
-      <span class="sdg-chip" style="background:#FD6925">SDG 11 지속가능도시</span>
-      <span class="sdg-chip" style="background:#BF8B2E">SDG 12 책임있는 소비</span>
-      <span class="sdg-chip" style="background:#3F7E44">SDG 13 기후행동</span>
-      <span class="sdg-chip" style="background:#0A97D9">SDG 14 해양생태계</span>
-      <span class="sdg-chip" style="background:#56C02B">SDG 15 육상생태계</span>
-      <span class="sdg-chip" style="background:#19486A">SDG 17 글로벌 파트너십</span>
+  <!-- ★ 활동지 모음 배너 -->
+  <div style="background:#1a1a2e;border-radius:12px;padding:20px 24px;margin-bottom:28px;">
+    <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.5);margin-bottom:14px">📝 학생 활동지 바로가기</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <a href="에너지_프로슈머_학습지.html" target="_blank" style="flex:1;min-width:180px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:9px;padding:12px 14px;text-decoration:none;display:flex;align-items:center;gap:10px;transition:background .2s;">
+        <div style="width:36px;height:36px;background:linear-gradient(135deg,#2d7a4f,#4caf80);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">⚡</div>
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,.45);margin-bottom:2px">수업 01 · [9사(지리)03-02]</div>
+          <div style="font-size:12px;font-weight:700;color:white;line-height:1.4">나는 에너지 프로슈머!<br>에너지 자립 학교 만들기</div>
+        </div>
+      </a>
+      <a href="sdgs_지구촌프로젝트_활동지.html" target="_blank" style="flex:1;min-width:180px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:9px;padding:12px 14px;text-decoration:none;display:flex;align-items:center;gap:10px;transition:background .2s;">
+        <div style="width:36px;height:36px;background:linear-gradient(135deg,#e5243b,#19486a);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🌍</div>
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,.45);margin-bottom:2px">수업 02 · [9사(지리)04-03]</div>
+          <div style="font-size:12px;font-weight:700;color:white;line-height:1.4">지구촌 이웃과 함께<br>성장하는 프로젝트</div>
+        </div>
+      </a>
+      <a href="내일_슬기로운지구시민.html" target="_blank" style="flex:1;min-width:180px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:9px;padding:12px 14px;text-decoration:none;display:flex;align-items:center;gap:10px;transition:background .2s;">
+        <div style="width:36px;height:36px;background:linear-gradient(135deg,#3f7e44,#0a97d9);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🎬</div>
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,.45);margin-bottom:2px">수업 08 · [9사(지리)12-02]</div>
+          <div style="font-size:12px;font-weight:700;color:white;line-height:1.4">영화 &lt;내일&gt;과<br>슬기로운 지구시민</div>
+        </div>
+      </a>
     </div>
   </div>
 
-</div>
+  <!-- ═══ 지리적 상상력 섹션 ═══ -->
+  <div id="sec-geo">
+    <div class="section-header-bar geo">
+      📍 지리적 상상력 수업 <span>— 『지리적 상상력으로 세계시민 되기』 (유네스코 APCEIU, 2024) 연계</span>
+    </div>
 
-<div class="footer">
-  내곡중학교 · 사회·지리 수업 자료<br>
-  2022 개정 교육과정 기반 · SDGs 연계 수업
-</div>
+    <!-- 01 [9사(지리)03-02] 에너지 프로슈머 -->
+    <div class="lesson-card geo-card" onclick="toggle(this)">
+      <div class="lesson-header">
+        <div class="lesson-num-col" style="background:linear-gradient(180deg,var(--sdg11),var(--sdg13))"></div>
+        <div class="lesson-num">01</div>
+        <div class="lesson-info">
+          <h3>나는 에너지 프로슈머! 에너지 자립 학교 만들기</h3>
+          <div class="lesson-meta">
+            <span class="sdg-pill sdg11">SDG 11 지속가능 도시</span>
+            <span class="sdg-pill sdg13">SDG 13 기후변화 대응</span>
+            <span class="std-code">[9사(지리)03-02]</span>
+            <span style="font-size:11px;color:#888">기후위기와 생태 시민</span>
+          </div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="lesson-body">
+        <div class="source-box">📚 <strong>출처:</strong> 『지리적 상상력으로 세계시민 되기』 6장 "에너지전환시대" (p.211~237), 7장 "기후위기시대" (p.251~276)</div>
+        <div class="achievement-box">
+          <div class="label">관련 성취기준 [9사(지리)03-02]</div>
+          <div class="desc">다양한 유형의 도시를 탐색하고, 기후위기에 대응하여 지속가능한 도시를 만들기 위한 노력을 조사한다.</div>
+          <div class="ab-note"><strong>📌 해설 핵심:</strong> 다양한 기능과 특징을 가진 도시 탐색을 바탕으로, 탄소중립·생태공간·기후위기 대응 정책이 도시 생활공간과 일상을 어떻게 변화시키는지에 관심을 갖도록 설정.<br><strong>⚑ 고려사항:</strong> 단순한 신재생에너지 나열이 아니라, 기후위기 대응 <strong>도시 사례</strong>(덴마크 코펜하겐, 독일 프라이부르크 등)를 통해 "우리 도시·학교도 가능한가?"로 연결하도록 지도.</div>
+        </div>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="step-badge intro">도입 (탐색)</div>
+            <div class="step-content"><strong>가열화 줄무늬(Warming Stripes)</strong>와 최근 이상기후 뉴스로 기후위기를 체감한 뒤, "세계 도시들은 이 문제에 어떻게 대응하고 있을까?"를 질문합니다. 덴마크 코펜하겐(탄소중립 목표), 독일 프라이부르크(태양에너지 도시) 사례를 짧게 소개합니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge main">전개 (조사·전문가 학습)</div>
+            <div class="step-content">4인 1조 전문가 학습: 각자 <strong>태양광·풍력, 수소·연료전지, 수력·지열, 바이오·폐기물</strong> 분야 도시 사례를 조사하고 모둠 내 공유합니다. 핵심 질문: <strong>"이 기술을 우리 도시·학교에 도입하면 무엇이 달라질까?"</strong></div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge wrap">정리 (설계·제안)</div>
+            <div class="step-content"><strong>'우리 학교 기후위기 대응 설계도'</strong> — 학교 건물 도면에 태양광 패널·지열 시스템·스마트 플러그 등을 배치하고, "이 학교가 지속가능한 도시의 한 단위가 되려면?"을 주제로 발표합니다. Miro 등 온라인 협업 도구 활용 권장.</div>
+          </div>
+        </div>
+        <div class="note-box"><div class="note-label">✏️ 교사 유의점</div>도시 탐색을 에너지 기술 나열로 끝내지 않도록 주의하세요. <strong>도시 생활공간·일상이 어떻게 달라지는지</strong>를 중심에 두고, 학생들이 자신이 사는 도시와 연결해 생각하도록 이끄는 것이 이 성취기준의 핵심입니다.</div>
+        <div class="unesco-box">
+          <div class="label">🌐 유네스코 세계시민교육 3대 학습영역 연계</div>
+          <div class="unesco-tags">
+            <span class="unesco-tag">인지적: 지역·국가·세계 차원 이슈</span>
+            <span class="unesco-tag">인지적: 지속가능 도시와 기후위기</span>
+            <span class="unesco-tag">사회·정서적: 공동체 간 상호연계</span>
+            <span class="unesco-tag">행동적: 참여하고 실천하기</span>
+          </div>
+        </div>
+        <div class="ws-btn-wrap">
+          <div class="ws-icon">📝</div>
+          <div class="ws-info">
+            <div class="ws-label">학생 활동지</div>
+            <div class="ws-title">나는 에너지 프로슈머! 에너지 자립 학교 만들기</div>
+          </div>
+          <a href="에너지_프로슈머_학습지.html" target="_blank" class="ws-link">활동지 열기 →</a>
+        </div>
+      </div>
+    </div>
 
+    <!-- 02 [9사(지리)04-03] 지구촌 프로젝트 -->
+    <div class="lesson-card geo-card" onclick="toggle(this)">
+      <div class="lesson-header">
+        <div class="lesson-num-col" style="background:linear-gradient(180deg,var(--sdg1),var(--sdg17))"></div>
+        <div class="lesson-num">02</div>
+        <div class="lesson-info">
+          <h3>지구촌 이웃과 함께 성장하는 프로젝트</h3>
+          <div class="lesson-meta">
+            <span class="sdg-pill sdg1">SDG 1 빈곤 종식</span>
+            <span class="sdg-pill sdg17">SDG 17 파트너십</span>
+            <span class="std-code">[9사(지리)04-03]</span>
+            <span style="font-size:11px;color:#888">국제개발협력과 연대</span>
+          </div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="lesson-body">
+        <div class="source-box">📚 <strong>출처:</strong> 『지리적 상상력으로 세계시민 되기』 8장 "누구도 소외되지 않는 지속가능한 발전을 꿈꾸다" (p.289~326)</div>
+        <div class="achievement-box">
+          <div class="label">관련 성취기준 [9사(지리)04-03]</div>
+          <div class="desc">지속가능한 발전을 위한 아프리카 각 지역의 노력과 세계 다양한 주체들의 협력 사례를 조사하고, 세계시민으로서 우리가 참여할 수 있는 방안을 모색한다.</div>
+          <div class="ab-note"><strong>📌 해설 핵심:</strong> 아프리카를 <strong>문제의 대상이 아닌 교류·협력의 동반자</strong>로 인식. 아프리카의 주체적 노력과 잠재력을 함께 다루며, 더 공정하고 지속가능한 세계 만들기에 동참하는 태도를 기르도록 설정.<br><strong>⚑ 고려사항:</strong> 학습 이전에 갖고 있던 아프리카에 대한 인식과 비교하여 변화를 <strong>스스로 성찰</strong>하도록 지도. 통계·뉴스 등 객관적 근거 활용. 아프리카 지역별 다양성 강조.</div>
+        </div>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="step-badge intro">도입 (인식 점검)</div>
+            <div class="step-content"><strong>"아프리카 하면 떠오르는 단어를 3개 써봅시다."</strong> — 수업 전 인식을 포스트잇으로 수집합니다(수업 후 비교용). 이어서 르완다 IT 특성화고·케냐 실리콘사바나 등 아프리카의 <strong>주체적 발전 사례</strong>를 소개하여 편견에 균열을 냅니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge main">전개 (조사·협력 사례 분석)</div>
+            <div class="step-content">아프리카 각 지역의 지속가능한 발전 노력과 세계 다양한 주체들(UN, NGO, 기업, 한국 KOICA)의 협력 사례를 모둠별로 조사합니다. 실패한 일방적 원조 사례(우물 펌프)와 성공 사례(르완다 KOICA 학교)를 비교하며 <strong>"진짜 협력이란 무엇인가?"</strong>를 탐구합니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge wrap">정리 (참여 방안 모색·성찰)</div>
+            <div class="step-content"><strong>모의 개발협력 회의</strong>: NGO 활동가·마을 대표·현지 학생·정부 담당자 역할로 나눠 협력 프로젝트(태양광 램프, 빗물 정수기 등)를 기획합니다. 회의 후 수업 전 포스트잇과 비교하며 <strong>아프리카에 대한 인식 변화를 스스로 성찰</strong>합니다.</div>
+          </div>
+        </div>
+        <div class="note-box"><div class="note-label">✏️ 교사 유의점</div>수업 전후 인식 비교는 이 성취기준의 핵심 활동입니다. 아프리카를 <strong>동반자</strong>로 인식하는 것이 목표이므로, 수업 내내 "아프리카가 어떤 노력을 하고 있는가"를 중심에 두세요. 아프리카의 <strong>지역별 차이</strong>를 강조하는 것도 중요합니다.</div>
+        <div class="unesco-box">
+          <div class="label">🌐 유네스코 세계시민교육 3대 학습영역 연계</div>
+          <div class="unesco-tags">
+            <span class="unesco-tag">인지적: 지역·국가·세계 체계와 구조</span>
+            <span class="unesco-tag">인지적: 지속가능 발전과 국제 협력</span>
+            <span class="unesco-tag">사회·정서적: 공동체 간 상호연계 방식</span>
+            <span class="unesco-tag">행동적: 개인적·집단적 실천</span>
+            <span class="unesco-tag">행동적: 참여하고 실천하기</span>
+          </div>
+        </div>
+        <div class="ws-btn-wrap">
+          <div class="ws-icon">📝</div>
+          <div class="ws-info">
+            <div class="ws-label">학생 활동지</div>
+            <div class="ws-title">지구촌 이웃과 함께 성장하는 프로젝트</div>
+          </div>
+          <a href="sdgs_지구촌프로젝트_활동지.html" target="_blank" class="ws-link">활동지 열기 →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 [9사(지리)05-03] 초국적 기업 ★신규 -->
+    <div class="lesson-card geo-card" onclick="toggle(this)">
+      <div class="lesson-header">
+        <div class="lesson-num-col" style="background:linear-gradient(180deg,var(--sdg9),var(--sdg10))"></div>
+        <div class="lesson-num">03</div>
+        <div class="lesson-info">
+          <h3>내 운동화는 어디서 만들어졌을까?</h3>
+          <div class="lesson-meta">
+            <span class="sdg-pill sdg9">SDG 9 산업·혁신</span>
+            <span class="sdg-pill sdg10">SDG 10 불평등 감소</span>
+            <span class="sdg-pill sdg12">SDG 12 책임있는 소비</span>
+            <span class="std-code">[9사(지리)05-03]</span>
+            <span style="font-size:11px;color:#888">초국적 기업과 지역 변화</span>
+          </div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="lesson-body">
+        <div class="source-box">📚 <strong>출처:</strong> 『지리적 상상력으로 세계시민 되기』 5장 "초국적 기업은 왜 먼 나라에 공장을 세울까요?" (p.173~210)</div>
+        <div class="achievement-box">
+          <div class="label">관련 성취기준 [9사(지리)05-03]</div>
+          <div class="desc">초국적 기업을 사례로 초국적 기업의 생산체계가 지역에 미치는 영향을 살펴보고, 초국적 기업 입지 이전의 이유, 그로 인한 해당 지역의 변화를 분석한다.</div>
+          <div class="ab-note"><strong>📌 해설 핵심:</strong> 초국적 기업은 하나의 본사에 모든 의사결정이 집중되지 않고 여러 나라에서 다양한 기능을 수행하는 특성이 있음. <strong>전 세계로 수평적 네트워크형 조직 구조</strong>를 바탕으로 이루어지고 있음을 인식하도록 지도.<br><strong>⚑ 고려사항:</strong> 뉴스·동영상·사진·문학 작품 등 다양한 자료 적극 활용. 초국적 기업의 입지가 지역 주민에게 일자리·세금이라는 긍정적 측면과 <strong>착취·환경파괴</strong>라는 부정적 측면을 균형 있게 다루도록 지도.</div>
+        </div>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="step-badge intro">도입 (탐색)</div>
+            <div class="step-content">학생들이 신고 있는 운동화·입고 있는 옷의 라벨을 확인합니다. <strong>"나이키는 왜 미국 회사인데 베트남·인도네시아에서 만들까?"</strong> 세계지도에 브랜드 본사와 생산 공장 위치를 연결하며 초국적 기업 개념을 도입합니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge main">전개 (분석·조사)</div>
+            <div class="step-content">모둠별로 나이키·애플·삼성·유니클로 등 친숙한 초국적 기업 1개를 선택하여 <strong>본사·R&amp;D·생산·판매 입지</strong>를 세계지도에 매핑합니다. 생산지 이전 이유(저임금, 세제 혜택, 원자재 접근성)와 그로 인한 <strong>해당 지역의 변화</strong>(일자리 창출 vs 노동 착취, 환경 파괴)를 뉴스·영상 자료로 분석합니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge wrap">정리 (토의·실천)</div>
+            <div class="step-content"><strong>"소비자로서 나는 어떤 선택을 해야 할까?"</strong> — 초국적 기업의 생산 이동이 지역에 미치는 긍정·부정 영향을 균형 있게 평가하고, <strong>책임있는 소비자</strong>로서 실천 방안을 모둠별로 제안합니다(공정무역 인증, 기업 윤리 점수 확인 등). Canva로 '착한 소비 가이드' 카드뉴스를 제작합니다.</div>
+          </div>
+        </div>
+        <div class="note-box"><div class="note-label">✏️ 교사 유의점</div>초국적 기업을 단순히 '나쁜 기업'으로 규정하지 않도록 주의하세요. <strong>긍정·부정 영향을 균형 있게</strong> 다루되, 소비자·시민으로서의 선택이 기업 행동에 영향을 줄 수 있다는 행위자적 관점을 심어주는 것이 핵심입니다. 학생들이 이미 아는 브랜드를 활용하면 흥미와 몰입이 높아집니다.</div>
+        <div class="unesco-box">
+          <div class="label">🌐 유네스코 세계시민교육 3대 학습영역 연계</div>
+          <div class="unesco-tags">
+            <span class="unesco-tag">인지적: 지역·국가·세계 체계와 구조</span>
+            <span class="unesco-tag">인지적: 초국적 기업과 불평등 문제</span>
+            <span class="unesco-tag">사회·정서적: 공동체 간 상호연계 방식</span>
+            <span class="unesco-tag">행동적: 윤리적으로 책임감 있는 행동</span>
+            <span class="unesco-tag">행동적: 참여하고 실천하기</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 [9사(지리)12-01] 밥상에서 세계를 -->
+    <div class="lesson-card geo-card" onclick="toggle(this)">
+      <div class="lesson-header">
+        <div class="lesson-num-col" style="background:linear-gradient(180deg,var(--sdg2),var(--sdg12))"></div>
+        <div class="lesson-num">04</div>
+        <div class="lesson-info">
+          <h3>우리 학교 밥상에서 세계를 보다</h3>
+          <div class="lesson-meta">
+            <span class="sdg-pill sdg2">SDG 2 기아 종식</span>
+            <span class="sdg-pill sdg12">SDG 12 책임있는 소비</span>
+            <span class="std-code">[9사(지리)12-01]</span>
+            <span style="font-size:11px;color:#888">자원과 윤리적 소비</span>
+          </div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="lesson-body">
+        <div class="source-box">📚 <strong>출처:</strong> 『지리적 상상력으로 세계시민 되기』 4장 "먹으면서 세계 얘기 좀 할까요?" (p.151~171)</div>
+        <div class="achievement-box">
+          <div class="label">관련 성취기준 [9사(지리)12-01]</div>
+          <div class="desc">우리나라 주요 식량 자원 및 에너지 자원의 소비 현황과 수입국 현황을 분석하여 이와 관련된 문제를 파악하고, 자원의 지속가능한 확보 방안을 모색한다.</div>
+          <div class="ab-note"><strong>📌 해설 핵심:</strong> 식량·에너지 자원이 우리 삶과 지역 문제에 긴밀하게 연결되어 있음을 인식. 국가적 관점뿐 아니라 <strong>전 지구적 관점</strong>에서 경제·환경의 균형 있는 자원 개발·확보 방향을 모색하는 데 초점.<br><strong>⚑ 고려사항:</strong> 우리나라의 주요 수입국 현황 데이터(통계·지도)를 반드시 활용. 자원 문제가 먼 나라 이야기가 아닌 우리 급식판·일상과 연결됨을 체감하도록 지도.</div>
+        </div>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="step-badge intro">도입</div>
+            <div class="step-content">오늘 급식 재료가 어느 나라에서 왔는지 세계 지도에 선으로 이어봅니다. <strong>푸드 마일리지(Food Mileage)</strong> 개념을 도입하며, "왜 이렇게 멀리서 오는 걸까?"라는 질문으로 수업을 시작합니다. → 우리나라 식량 자급률(약 45%) 수치 제시.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge main">전개 (분석·조사)</div>
+            <div class="step-content">우리나라 주요 식량·에너지 자원의 <strong>수입국 현황을 지도와 그래프</strong>로 분석합니다. 수입 의존이 높을 때 생기는 문제(가격 폭등, 수출 금지, 아동 노동, 열대우림 파괴)를 조사하고, <strong>로커보어(Locavore)</strong>와 <strong>공정무역</strong> 사례를 통해 지속가능한 자원 확보 방안을 탐구합니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge wrap">정리 (모색·실천)</div>
+            <div class="step-content">모둠별로 <strong>'우리 학교 지속가능 급식 식단'</strong>을 기획합니다. 로컬푸드·공정무역 제품을 활용한 하루 식단을 짜고, <strong>"왜 이 식단이 자원 문제 해결에 기여하는가?"</strong>를 근거로 영양교사에게 제안하는 포스터를 발표합니다.</div>
+          </div>
+        </div>
+        <div class="note-box"><div class="note-label">✏️ 교사 유의점</div>수업 전 학생들이 우리나라 식량 자급률에 대해 갖고 있는 인식을 간단히 확인하고, 수업 후 어떻게 달라졌는지 스스로 성찰하도록 유도하세요. 단순한 윤리 교육이 아니라 <strong>경제·환경의 균형</strong>이라는 지리적 관점을 유지하는 것이 핵심입니다.</div>
+        <div class="unesco-box">
+          <div class="label">🌐 유네스코 세계시민교육 3대 학습영역 연계</div>
+          <div class="unesco-tags">
+            <span class="unesco-tag">인지적: 지역·국가·세계 체계와 구조</span>
+            <span class="unesco-tag">사회·정서적: 공동체 상호연계 방식</span>
+            <span class="unesco-tag">행동적: 윤리적으로 책임감 있는 행동</span>
+            <span class="unesco-tag">행동적: 참여하고 실천하기</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 [9사(일사)01-03] 이주민의 안경 -->
+    <div class="lesson-card geo-card" onclick="toggle(this)">
+      <div class="lesson-header">
+        <div class="lesson-num-col" style="background:linear-gradient(180deg,var(--sdg5),var(--sdg10))"></div>
+        <div class="lesson-num">05</div>
+        <div class="lesson-info">
+          <h3>이주민의 안경을 쓰고 세상 보기</h3>
+          <div class="lesson-meta">
+            <span class="sdg-pill sdg5">SDG 5 성평등</span>
+            <span class="sdg-pill sdg10">SDG 10 불평등 감소</span>
+            <span class="std-code">[9사(일사)01-03]</span>
+            <span style="font-size:11px;color:#888">인구 이동과 차별 극복</span>
+          </div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="lesson-body">
+        <div class="source-box">📚 <strong>출처:</strong> 『지리적 상상력으로 세계시민 되기』 3장 "인구는 줄어드는데, 왜 이주민은 반대할까요?" (p.117~150)</div>
+        <div class="achievement-box">
+          <div class="label">관련 성취기준 [9사(일사)01-03]</div>
+          <div class="desc">우리 사회에 나타나는 다양한 갈등과 차별의 사례를 조사하고, 이에 대처하는 시민의 자질에 대해 토의한다.</div>
+          <div class="ab-note"><strong>📌 해설 핵심:</strong> 성별·지역·계층·인종(외국인)·장애인 차별 등 <strong>우리 사회의 구체적 사례</strong>를 조사. 갈등은 이익과 가치의 차이에서 자연스럽게 발생하는 현상임을 인식하되, 편견과 차별은 적극적으로 개선해야 할 문제임을 다룸.<br><strong>⚑ 고려사항:</strong> 차별 경험이 있는 소수자에 대해 공감하고 배려하는 태도 함양. 학급 내 다문화 가정 학생이 있을 경우 안전한 토의 환경 조성에 유의.</div>
+        </div>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="step-badge intro">도입 (사례 탐색)</div>
+            <div class="step-content">한국에 거주하는 외국인 유튜버나 이주 노동자의 일상을 담은 짧은 영상을 시청합니다. <strong>"이 사람이 우리 사회에서 겪는 어려움은 무엇일까?"</strong>를 먼저 질문하여, 공감을 출발점으로 삼습니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge main">전개 (조사·토의)</div>
+            <div class="step-content">우리 사회의 갈등·차별 사례를 <strong>성별·지역·계층·인종·장애</strong> 유형별로 나눠 모둠 조사합니다. 이주민이 겪는 법적·사회문화적 차별 기사를 읽고, <strong>"갈등과 차별은 어떻게 다른가?"</strong>를 토의합니다. 이주민 통계 지도로 이주 원인도 함께 파악합니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge wrap">정리 (공감 글쓰기·시민 자질 토의)</div>
+            <div class="step-content"><strong>노벨엔지니어링</strong> 적용: 이주 노동자 입장에서 하루 일기 쓰기. 이후 <strong>"차별에 대처하는 시민의 자질은 무엇인가?"</strong>를 모둠 토의로 정리하고, 우리 학교·지역에서 실천할 수 있는 방안을 제안합니다.</div>
+          </div>
+        </div>
+        <div class="note-box"><div class="note-label">✏️ 교사 유의점</div>학급 내 다문화 가정 학생이 있을 경우 당사자가 대표로 발언하도록 강요하지 않도록 세심하게 운영하세요. <strong>갈등은 자연스러운 현상, 차별은 개선해야 할 문제</strong>라는 구분을 수업 전반에서 일관되게 유지하는 것이 중요합니다.</div>
+        <div class="unesco-box">
+          <div class="label">🌐 유네스코 세계시민교육 3대 학습영역 연계</div>
+          <div class="unesco-tags">
+            <span class="unesco-tag">인지적: 공동체 상호작용과 이슈</span>
+            <span class="unesco-tag">사회·정서적: 다양한 차원의 정체성</span>
+            <span class="unesco-tag">사회·정서적: 차이와 다양성의 존중</span>
+            <span class="unesco-tag">행동적: 윤리적으로 책임감 있는 행동</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06 [9사(일사)11-02] 그림책 평화로운 국경선 -->
+    <div class="lesson-card geo-card" onclick="toggle(this)">
+      <div class="lesson-header">
+        <div class="lesson-num-col" style="background:var(--sdg16)"></div>
+        <div class="lesson-num">06</div>
+        <div class="lesson-info">
+          <h3>그림책으로 그리는 평화로운 국경선</h3>
+          <div class="lesson-meta">
+            <span class="sdg-pill sdg16">SDG 16 평화·정의·제도</span>
+            <span class="std-code">[9사(일사)11-02]</span>
+            <span style="font-size:11px;color:#888">국제 분쟁과 평화</span>
+          </div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="lesson-body">
+        <div class="source-box">📚 <strong>출처:</strong> 『지리적 상상력으로 세계시민 되기』 2장 "평화를 위한 지정학이 되려면?" (p.83~102)</div>
+        <div class="achievement-box">
+          <div class="label">관련 성취기준 [9사(일사)11-02]</div>
+          <div class="desc">우리나라가 직면하고 있는 국제 문제에 대해 조사하고, 이러한 문제에 대응하기 위한 방안에 대해 토론한다.</div>
+          <div class="ab-note"><strong>📌 해설 핵심:</strong> 비핵화·무역·난민·영토 분쟁 등 <strong>우리나라가 직면한 국제 문제</strong>를 중심으로 정부·기업·시민사회의 대응을 탐색. 다양한 시민으로서 평화 공존을 위한 <strong>의사소통 능력</strong> 함양에 초점.<br><strong>⚑ 고려사항:</strong> 국제 사회 행위 주체(국제기구, 다국적 기업, 시민사회)의 실제 활동을 조사하도록 안내. SNS·누리집 등을 활용해 정보를 찾고 공유하는 실천 과제 설계 권장.</div>
+        </div>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="step-badge intro">도입 (공감·문제 인식)</div>
+            <div class="step-content">프란체스카 산나의 그림책 <strong>『긴 여행』</strong>을 함께 읽으며 전쟁·분쟁으로 고향을 떠나는 사람들의 상황에 이입합니다. <strong>"우리나라는 이런 국제 문제와 어떻게 연결되어 있을까?"</strong>로 질문을 확장합니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge main">전개 (조사·토론)</div>
+            <div class="step-content">우리나라가 직면한 국제 문제(비핵화, 무역 갈등, 난민 수용, 독도·영토 문제)를 모둠별로 조사합니다. 그림책 속 난민 이동 경로를 세계지도에 그리며 원인을 파악하고, <strong>정부·국제기구·시민사회</strong>가 각각 어떻게 대응하는지 비교 토론합니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge wrap">정리 (방안 제시·실천)</div>
+            <div class="step-content">도화지 반반에 <strong>'갈등 중인 국경'과 '평화로운 국경'</strong>을 비주얼 씽킹으로 표현합니다. 이후 <strong>SNS 평화 캠페인 카드뉴스</strong>를 Canva·Padlet으로 제작하여 공유합니다.</div>
+          </div>
+        </div>
+        <div class="note-box"><div class="note-label">✏️ 교사 유의점</div>"우리나라가 직면한 국제 문제"가 핵심입니다. 세계 분쟁 일반이 아니라, <strong>한국과 직접 연결된 문제</strong>(비핵화, 무역, 난민 수용 정책 등)를 다루어야 성취기준에 부합합니다. 토론 과정에서 정치적으로 민감한 사안은 <strong>다양한 입장 이해</strong>로 접근하세요.</div>
+        <div class="unesco-box">
+          <div class="label">🌐 유네스코 세계시민교육 3대 학습영역 연계</div>
+          <div class="unesco-tags">
+            <span class="unesco-tag">인지적: 지역·국가·세계 체계와 구조</span>
+            <span class="unesco-tag">인지적: 국제 문제와 행위 주체</span>
+            <span class="unesco-tag">사회·정서적: 공동체 간 상호연계 방식</span>
+            <span class="unesco-tag">행동적: 개인적·집단적 실천</span>
+            <span class="unesco-tag">행동적: 참여하고 실천하기</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /sec-geo -->
+
+  <!-- ═══ 영화 섹션 ═══ -->
+  <div id="sec-movie" style="margin-top:32px">
+    <div class="section-header-bar movie">
+      🎬 영화 수업 <span>— 『영화로 알아보는 세계시민교육 중등』 (유네스코 APCEIU, 2021) 연계</span>
+    </div>
+
+    <!-- 07 [9사(지리)12-01] 모따이나이 키친 -->
+    <div class="lesson-card movie-card" onclick="toggle(this)">
+      <div class="lesson-header">
+        <div class="lesson-num-col" style="background:linear-gradient(180deg,var(--sdg2),var(--sdg12))"></div>
+        <div class="lesson-num">07</div>
+        <div class="lesson-info">
+          <h3>영화 &lt;모따이나이 키친&gt;과 식탁 위 3R</h3>
+          <div class="lesson-meta">
+            <span class="sdg-pill sdg2">SDG 2 기아 종식</span>
+            <span class="sdg-pill sdg12">SDG 12 책임있는 소비</span>
+            <span class="std-code">[9사(지리)12-01]</span>
+            <span style="font-size:11px;color:#888">자원 문제와 윤리적 소비</span>
+          </div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="lesson-body">
+        <div class="source-box">🎬 <strong>출처:</strong> 『영화로 알아보는 세계시민교육(중등)』 &lt;모따이나이 키친&gt; (p.75~85) · 감독: 다비드 그로스 · 러닝타임 95분 · 전체관람가 · 배급: ㈜시네마달</div>
+        <div class="achievement-box">
+          <div class="label">관련 성취기준 [9사(지리)12-01]</div>
+          <div class="desc">우리나라 주요 식량 자원 및 에너지 자원의 소비 현황과 수입국 현황을 분석하여 이와 관련된 문제를 파악하고, 자원의 지속가능한 확보 방안을 모색한다.</div>
+          <div class="ab-note"><strong>📌 해설 핵심:</strong> 지리적 상상력 04번과 동일 성취기준이나 <strong>음식 낭비·소비 감소라는 다른 진입점</strong>에서 접근. 3R 실천을 통한 지속가능한 자원 확보 방안으로 연결.<br><strong>⚑ 고려사항:</strong> 자원 소비 현황 분석 → 문제 파악 → 확보 방안 모색의 흐름을 영화를 통해 구현. 한국 음식물 쓰레기 연간 약 1,500만 톤 통계와 연결.</div>
+        </div>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="step-badge intro">도입 (소비 현황 분석)</div>
+            <div class="step-content">한국의 연간 음식물 쓰레기량과 처리 비용을 수치로 제시합니다. <strong>"이 음식들은 원래 어디서 왔을까? 어느 나라에서 수입한 식량 자원일까?"</strong>로 질문을 확장하여 자원 소비 현황으로 연결합니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge main">전개 (영화 감상·문제 파악)</div>
+            <div class="step-content"><strong>&lt;모따이나이 키친&gt;</strong>을 감상합니다. 일본의 <strong>'모따이나이(もったいない)'</strong> 문화와 소비기한제를 우리나라 식량 자원 낭비 문제와 연결하여 토의합니다. <strong>3R 원칙(Reduce·Reuse·Recycle)</strong>이 자원의 지속가능한 확보에 어떻게 기여하는지 분석합니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge wrap">정리 (방안 모색·실천)</div>
+            <div class="step-content">모둠별로 <strong>'우리 학교 자원 낭비 줄이기 방안'</strong>을 기획합니다 — 잔반 제로 캠페인, 플라스틱 줄이기 포스터 등. <strong>"이 실천이 우리나라 식량·자원 문제 해결에 어떻게 연결되는가?"</strong>를 근거로 발표합니다.</div>
+          </div>
+        </div>
+        <div class="note-box"><div class="note-label">✏️ 교사 유의점</div>지리적 상상력 04번(우리 학교 밥상)과 동일 성취기준이지만, 이 수업은 <strong>소비 감소·낭비 방지</strong> 측면에서 접근합니다. 두 수업을 같은 단원 안에서 연계하면 [9사(지리)12-01]을 더 풍부하게 다룰 수 있습니다.</div>
+        <div class="unesco-box">
+          <div class="label">🌐 유네스코 세계시민교육 3대 학습영역 연계</div>
+          <div class="unesco-tags">
+            <span class="unesco-tag">인지적: 자원 소비 현황과 문제</span>
+            <span class="unesco-tag">사회·정서적: 생태 감수성과 공동체</span>
+            <span class="unesco-tag">행동적: 윤리적으로 책임감 있는 행동</span>
+            <span class="unesco-tag">행동적: 참여하고 실천하기</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 08 [9사(지리)12-02] 영화 내일 -->
+    <div class="lesson-card movie-card" onclick="toggle(this)">
+      <div class="lesson-header">
+        <div class="lesson-num-col" style="background:linear-gradient(180deg,var(--sdg11),var(--sdg13))"></div>
+        <div class="lesson-num">08</div>
+        <div class="lesson-info">
+          <h3>영화 &lt;내일&gt;과 슬기로운 지구시민</h3>
+          <div class="lesson-meta">
+            <span class="sdg-pill sdg11">SDG 11 지속가능 도시</span>
+            <span class="sdg-pill sdg12">SDG 12 책임있는 소비</span>
+            <span class="sdg-pill sdg13">SDG 13 기후변화 대응</span>
+            <span class="std-code">[9사(지리)12-02]</span>
+            <span style="font-size:11px;color:#888">기후위기와 생태전환</span>
+          </div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="lesson-body">
+        <div class="source-box">🎬 <strong>출처:</strong> 『영화로 알아보는 세계시민교육(중등)』 &lt;내일&gt; (p.25~35) · 감독: 시릴 디옹, 멜라니 로랑 · 러닝타임 120분 · 전체관람가 · 배급: 플랫폼C</div>
+        <div class="achievement-box">
+          <div class="label">관련 성취기준 [9사(지리)12-02]</div>
+          <div class="desc">지역 개발과 환경 보존을 둘러싼 글로컬 환경 이슈에 관심을 갖고, 자신의 웰빙 및 공동체의 지속가능한 발전을 위해 참여하고 실천한다.</div>
+          <div class="ab-note"><strong>📌 해설 핵심:</strong> 개인·마을·나라·지구 다양한 스케일에서 일어나는 <strong>글로컬 환경 이슈</strong>에 관심을 갖도록 유도. 환경과 인간의 공존을 추구하며 지속가능한 발전을 위해 <strong>실제로 참여·실천</strong>하는 기회 제공이 핵심.<br><strong>⚑ 고려사항:</strong> 생태 감수성을 갖고 글로컬 환경 이슈와 관련된 다양한 주체들의 입장을 파악하도록 안내. 지속가능한 발전 방향에 관한 다양한 생각을 <strong>비판적으로 검토</strong>할 기회 제공.</div>
+        </div>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="step-badge intro">도입 (영화 관람·이슈 인식)</div>
+            <div class="step-content">환경 다큐멘터리 <strong>&lt;내일&gt;</strong>을 시청합니다. 시청 전 <strong>"지역 개발과 환경 보존, 둘 다 이룰 수 있을까?"</strong>를 질문하여 글로컬 환경 이슈에 대한 관심을 촉발합니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge main">전개 (사례 분석·다양한 입장 파악)</div>
+            <div class="step-content">영화 속 <strong>영국 토드모던 공동체 텃밭, 스위스 지역 화폐, 핀란드 대안 교육</strong> 사례를 스케일별(마을↔국가↔지구)로 정리합니다. <strong>"이 사례들에서 개발 측과 환경 보존 측은 각각 무엇을 중요하게 생각하는가?"</strong>를 비교하며 다양한 입장을 비판적으로 검토합니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge wrap">정리 (참여·실천 설계)</div>
+            <div class="step-content">주요 장면에 <strong>#해시태그 3개</strong>를 달고, 우리 학교·지역 스케일에서 실천 가능한 <strong>'나만의 내 일(My work) 아이디어 노트'</strong>를 작성합니다. 단순 아이디어가 아니라 <strong>실제로 참여할 수 있는 방법</strong>까지 구체화하여 발표합니다.</div>
+          </div>
+        </div>
+        <div class="note-box"><div class="note-label">✏️ 교사 유의점</div>이 성취기준의 핵심 동사는 <strong>"참여하고 실천한다"</strong>입니다. 영화 감상으로 끝내지 말고, 학생이 직접 실천 계획을 세우고 최소 1가지를 실행하는 과제와 연결하세요. 지역 개발과 환경 보존의 갈등을 단순히 '환경이 옳다'로 결론 내리지 않고 <strong>다양한 입장을 균형 있게</strong> 다루는 것이 중요합니다.</div>
+        <div class="unesco-box">
+          <div class="label">🌐 유네스코 세계시민교육 3대 학습영역 연계</div>
+          <div class="unesco-tags">
+            <span class="unesco-tag">인지적: 글로컬 환경 이슈와 스케일</span>
+            <span class="unesco-tag">사회·정서적: 생태 감수성과 공동체 연계</span>
+            <span class="unesco-tag">행동적: 참여하고 실천하기</span>
+          </div>
+        </div>
+        <div class="ws-btn-wrap">
+          <div class="ws-icon">📝</div>
+          <div class="ws-info">
+            <div class="ws-label">학생 활동지</div>
+            <div class="ws-title">영화 &lt;내일&gt;과 슬기로운 지구시민</div>
+          </div>
+          <a href="내일_슬기로운지구시민.html" target="_blank" class="ws-link">활동지 열기 →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 09 [9사(일사)12-02] 카트·모던타임즈 -->
+    <div class="lesson-card movie-card" onclick="toggle(this)">
+      <div class="lesson-header">
+        <div class="lesson-num-col" style="background:linear-gradient(180deg,var(--sdg8),var(--sdg10))"></div>
+        <div class="lesson-num">09</div>
+        <div class="lesson-info">
+          <h3>영화 &lt;카트&gt;, &lt;모던 타임즈&gt;로 본 공생의 일자리</h3>
+          <div class="lesson-meta">
+            <span class="sdg-pill sdg8">SDG 8 양질의 일자리</span>
+            <span class="sdg-pill sdg10">SDG 10 불평등 감소</span>
+            <span class="std-code">[9사(일사)12-02]</span>
+            <span style="font-size:11px;color:#888">불평등과 노동 문제</span>
+          </div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="lesson-body">
+        <div class="source-box">🎬 <strong>출처:</strong> 『영화로 알아보는 세계시민교육(중등)』 &lt;카트&gt; (p.49~59 · 감독 부지영 · 배급 명필름) + &lt;모던 타임즈&gt; (p.1~11 · 감독 찰리 채플린 · 저작권 만료 · 웨이브 등 합법 경로)</div>
+        <div class="achievement-box">
+          <div class="label">관련 성취기준 [9사(일사)12-02]</div>
+          <div class="desc">오늘날의 주요한 사회문제를 조사하고, 이러한 사회문제가 우리 생활에 미치는 영향에 대해 토의한다.</div>
+          <div class="ab-note"><strong>📌 해설 핵심:</strong> 노동 문제·사회 불평등·인구 문제·기후위기 등 다양한 사회문제를 사례로 조사하고, <strong>이것이 우리 가족과 이웃의 생활에 미치는 영향</strong>을 토의하는 것이 핵심. 영화를 통해 사회문제를 구체적·감각적으로 이해.<br><strong>⚑ 고려사항:</strong> 사회 변동의 구체적 양상(지식정보·서비스 사회, 과학기술 발전과 직업 세계 변화)을 사례로 이해. 최근 AI·자동화로 인한 노동 문제와도 연결 가능.</div>
+        </div>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="step-badge intro">도입 (문제 인식)</div>
+            <div class="step-content"><strong>&lt;모던 타임즈&gt; 톱니바퀴 씬</strong>으로 산업화 시대 노동 문제를 체감합니다. 이어서 <strong>"지금 우리 주변에는 이런 일이 없을까?"</strong>를 질문하며 현재 노동 문제로 시선을 이동합니다. 최근 AI·자동화로 인한 일자리 변화 뉴스도 짧게 소개합니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge main">전개 (조사·영향 토의)</div>
+            <div class="step-content">한국 영화 <strong>&lt;카트&gt;</strong>를 감상하며 마트 비정규직 노동 문제를 파악합니다. 과거(공장 노동)→현재(서비스 비정규직)→미래(AI 자동화) 변화를 비교 조사하고, <strong>"이 문제가 우리 가족·이웃의 생활에 어떤 영향을 미치는가?"</strong>를 모둠 토의합니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge wrap">정리 (토의·실천 방안)</div>
+            <div class="step-content"><strong>SDG 8 '양질의 일자리'</strong>란 무엇인지 정의한 뒤, 노동자·기업·정부 대표 역할극으로 <strong>'상생 일자리 협약서'</strong>를 작성합니다. <strong>"시민으로서 노동 문제 해결에 어떻게 참여할 수 있는가?"</strong>를 토의하며 마무리합니다.</div>
+          </div>
+        </div>
+        <div class="note-box"><div class="note-label">✏️ 교사 유의점</div>성취기준의 핵심은 <strong>"조사"와 "우리 생활에 미치는 영향 토의"</strong>입니다. 노동 문제가 추상적 사회 현상이 아니라 <strong>내 가족·이웃의 이야기</strong>임을 느끼도록 실제 사례와 연결하세요. AI와 자동화로 인한 미래 직업 변화도 자연스럽게 연결할 수 있습니다.</div>
+        <div class="unesco-box">
+          <div class="label">🌐 유네스코 세계시민교육 3대 학습영역 연계</div>
+          <div class="unesco-tags">
+            <span class="unesco-tag">인지적: 사회문제와 우리 생활의 연결</span>
+            <span class="unesco-tag">인지적: 사회 변동과 직업 세계 변화</span>
+            <span class="unesco-tag">사회·정서적: 공동체 간 상호연계 방식</span>
+            <span class="unesco-tag">행동적: 개인적·집단적 실천</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 [9사(일사)12-03] 나우시카 -->
+    <div class="lesson-card movie-card" onclick="toggle(this)">
+      <div class="lesson-header">
+        <div class="lesson-num-col" style="background:linear-gradient(180deg,var(--sdg13),var(--sdg15))"></div>
+        <div class="lesson-num">10</div>
+        <div class="lesson-info">
+          <h3>영화 &lt;바람계곡의 나우시카&gt;와 행복한 불편 챌린지</h3>
+          <div class="lesson-meta">
+            <span class="sdg-pill sdg13">SDG 13 기후변화 대응</span>
+            <span class="sdg-pill sdg15">SDG 15 육상 생태계</span>
+            <span class="std-code">[9사(일사)12-03]</span>
+            <span style="font-size:11px;color:#888">환경 파괴와 공존의 길</span>
+          </div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="lesson-body">
+        <div class="source-box">🎬 <strong>출처:</strong> 『영화로 알아보는 세계시민교육(중등)』 &lt;바람계곡의 나우시카&gt; (p.37~47) · 감독: 미야자키 하야오 · 러닝타임 116분 · 전체관람가 · ©1984 Studio Ghibli·H</div>
+        <div class="achievement-box">
+          <div class="label">관련 성취기준 [9사(일사)12-03]</div>
+          <div class="desc">사회 변동과 사회문제에 대응하는 국내외 사례를 검토하고, 시민으로서 지녀야 할 태도와 실천 방안에 대해 토의한다.</div>
+          <div class="ab-note"><strong>📌 해설 핵심:</strong> 기후위기 문제가 사회문제임을 인식하고, <strong>국내외에서 이에 대응하는 시민·정부·기업의 사례</strong>를 검토. 시민으로서 지녀야 할 태도와 실천 방안을 <strong>토의</strong>하는 것이 핵심 활동.<br><strong>⚑ 고려사항:</strong> 문제 해결 학습·프로젝트 수업 연계를 통해 학생 스스로 사회문제 해결 방안을 모색하도록 설계. 일상생활 속 지속적 실천이 가능하도록 과제 설계.</div>
+        </div>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="step-badge intro">도입 (문제 인식)</div>
+            <div class="step-content">애니메이션 <strong>&lt;바람계곡의 나우시카&gt;</strong> 부분 시청으로 환경 파괴 문제를 직관적으로 느낍니다. 이어서 <strong>현실 뉴스</strong>(기후위기 대응 관련 국내외 시민 운동 사례)를 연결하여 "이것은 먼 미래 이야기가 아니다"라는 인식을 형성합니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge main">전개 (국내외 사례 검토·토의)</div>
+            <div class="step-content">기후위기·환경 파괴에 대응하는 <strong>국내외 사례</strong>를 검토합니다: 영국 멸종반란(XR) 시민운동, 한국 탈석탄 캠페인, 기업의 ESG 경영 등. <em>"풍족하고 편리한 삶이 지구를 파괴한다면, 시민으로서 우리는 어떤 태도를 가져야 할까?"</em>를 주제로 모둠 토의합니다.</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-badge wrap">정리 (실천 방안 설계)</div>
+            <div class="step-content"><strong>'행복한 불편' 빙고판</strong>을 제작합니다(텀블러·일회용품 거절·걷기 등). <strong>"이 실천이 어떤 사회문제 해결과 연결되는가?"</strong>를 근거로 발표합니다. 1주일 실천 후 학급에서 성찰 나눔을 진행합니다.</div>
+          </div>
+        </div>
+        <div class="note-box"><div class="note-label">✏️ 교사 유의점</div>이 성취기준의 핵심은 <strong>"국내외 사례 검토"와 "시민으로서의 태도 토의"</strong>입니다. 나우시카 감상만으로 끝내지 말고, 반드시 실제 사례와 연결하세요. 실천 방안은 개인 실천을 넘어 <strong>집단적·사회적 차원</strong>도 함께 다루어야 성취기준에 부합합니다.</div>
+        <div class="unesco-box">
+          <div class="label">🌐 유네스코 세계시민교육 3대 학습영역 연계</div>
+          <div class="unesco-tags">
+            <span class="unesco-tag">인지적: 사회문제와 시민 대응 사례</span>
+            <span class="unesco-tag">사회·정서적: 생태 감수성과 공동체 의식</span>
+            <span class="unesco-tag">행동적: 개인적·집단적 실천</span>
+            <span class="unesco-tag">행동적: 참여하고 실천하기</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /sec-movie -->
+
+
+</div><!-- /container -->
+
+<footer style="background:#1a1a2e;color:rgba(255,255,255,.6);text-align:center;padding:32px;font-size:12px;line-height:1.8">
+  <div style="margin-bottom:8px">
+    <span style="color:rgba(255,255,255,.3);margin:0 8px">·</span>
+    기획 참고 자료: 『지리적 상상력으로 세계시민 되기』 (유네스코 APCEIU, 2024)
+    <span style="color:rgba(255,255,255,.3);margin:0 8px">·</span>
+    『영화로 알아보는 세계시민교육(중등)』 (유네스코 APCEIU, 2021)
+  </div>
+  <div>2022 개정 교육과정 연계 · 중학교 사회/지리 세계시민교육 수업 자료</div>
+</footer>
+
+<script>
+function toggle(card) { card.classList.toggle('open'); }
+
+function filter(type, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const geoSec   = document.getElementById('sec-geo');
+  const movieSec = document.getElementById('sec-movie');
+  if (type === 'all') {
+    geoSec.classList.remove('hidden');
+    movieSec.classList.remove('hidden');
+  } else if (type === 'geo') {
+    geoSec.classList.remove('hidden');
+    movieSec.classList.add('hidden');
+  } else {
+    geoSec.classList.add('hidden');
+    movieSec.classList.remove('hidden');
+  }
+}
+</script>
 </body>
 </html>
