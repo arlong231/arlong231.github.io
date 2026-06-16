@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>영화 〈내일〉과 슬기로운 지구시민</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal: #1aaa8f;
+  --teal-dark: #0d7d67;
+  --teal-light: #e8f8f5;
+  --teal-mid: #b2e8de;
+  --accent: #f9a825;
+  --accent2: #e53935;
+  --text: #1c2b2a;
+  --text-muted: #5a7271;
+  --bg: #f4faf9;
+  --white: #ffffff;
+  --card-shadow: 0 4px 20px rgba(26,170,143,0.10);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ─── HERO ─── */
+.hero {
+  background: linear-gradient(135deg, #0d3d33 0%, #155f4e 55%, #1aaa8f 100%);
+  color: white;
+  padding: 52px 24px 44px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -40px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: rgba(249,168,37,0.08);
+}
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  border: 1px solid rgba(249,168,37,0.4);
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+.hero h1 {
+  font-size: clamp(22px, 4.5vw, 40px);
+  font-weight: 900;
+  line-height: 1.25;
+  margin-bottom: 14px;
+  position: relative;
+}
+.hero h1 em {
+  font-style: normal;
+  color: #7ef0d9;
+}
+.hero-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.72);
+  max-width: 480px;
+  margin: 0 auto 22px;
+  line-height: 1.7;
+}
+.sdg-pills {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+.sdg-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  color: white;
+}
+.pill-11 { background: #fd9d24; }
+.pill-12 { background: #bf8b2e; }
+.pill-13 { background: #3f7e44; }
+.pill-std {
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.35);
+  font-size: 11px;
+  color: rgba(255,255,255,0.9);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+/* ─── FLOW BAR ─── */
+.flow-bar {
+  background: white;
+  border-bottom: 2px solid var(--teal-light);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.flow-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.flow-inner::-webkit-scrollbar { display: none; }
+.flow-tab {
+  flex-shrink: 0;
+  padding: 14px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 3px solid transparent;
+}
+.flow-tab:hover { color: var(--teal); }
+.flow-tab.active { color: var(--teal); border-bottom-color: var(--teal); }
+.flow-arrow {
+  color: #ccc;
+  font-size: 12px;
+  flex-shrink: 0;
+  padding: 0 4px;
+}
+
+/* ─── MAIN ─── */
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* ─── SECTION ─── */
+.section {
+  display: none;
+  animation: fadeIn 0.35s ease;
+}
+.section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.section-title-block {
+  padding: 36px 0 20px;
+  border-bottom: 2px solid var(--teal-light);
+  margin-bottom: 28px;
+}
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teal);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.section-title-block h2 {
+  font-size: clamp(18px, 3vw, 26px);
+  font-weight: 900;
+  color: var(--text);
+}
+
+/* ─── CARD ─── */
+.card {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  padding: 28px;
+  margin-bottom: 20px;
+}
+.card-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teal);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+/* ─── INTRO SECTION ─── */
+.movie-info-box {
+  background: linear-gradient(135deg, #0d3d33, #1aaa8f);
+  color: white;
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+.movie-poster {
+  width: 80px;
+  height: 110px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  flex-shrink: 0;
+  border: 2px solid rgba(255,255,255,0.2);
+}
+.movie-details { flex: 1; }
+.movie-details h3 {
+  font-size: 20px;
+  font-weight: 900;
+  margin-bottom: 6px;
+  color: #7ef0d9;
+}
+.movie-details p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+.movie-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  margin-right: 6px;
+  margin-top: 8px;
+}
+
+.question-big {
+  background: var(--teal-light);
+  border-left: 5px solid var(--teal);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+.question-big .qlabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teal-dark);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.question-big p {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.achievement-card {
+  background: white;
+  border: 2px solid var(--teal-mid);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-bottom: 20px;
+}
+.achievement-card .act-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teal-dark);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.act-code {
+  background: var(--teal);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.achievement-card p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.achievement-card p strong { color: var(--teal-dark); }
+
+/* ─── Q CARDS (곱씹어보기) ─── */
+.q-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.q-card {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+.q-header {
+  background: var(--teal);
+  color: white;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.q-num {
+  width: 32px;
+  height: 32px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.q-text {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.q-body {
+  padding: 16px 20px;
+}
+.answer-area {
+  width: 100%;
+  border: 2px solid var(--teal-mid);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  resize: vertical;
+  min-height: 80px;
+  outline: none;
+  transition: border-color 0.2s;
+  line-height: 1.7;
+  background: var(--teal-light);
+}
+.answer-area:focus {
+  border-color: var(--teal);
+  background: white;
+}
+.answer-area::placeholder { color: #9bb8b4; }
+
+/* ─── 해시태그 SECTION ─── */
+.person-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+@media (max-width: 520px) {
+  .person-grid { grid-template-columns: 1fr; }
+}
+.person-card {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+.person-card:focus-within { border-color: var(--teal); }
+.person-img {
+  width: 100%;
+  height: 130px;
+  background: linear-gradient(135deg, #e8f8f5, #b2e8de);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+.person-name-bar {
+  background: var(--teal);
+  color: white;
+  text-align: center;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  border-bottom: 3px dashed rgba(255,255,255,0.3);
+}
+.person-name-bar small {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 0.8;
+  margin-top: 1px;
+}
+.hashtag-fields {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.hashtag-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hashtag-prefix {
+  color: var(--teal);
+  font-weight: 900;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.hashtag-input {
+  flex: 1;
+  border: none;
+  border-bottom: 2px solid var(--teal-mid);
+  padding: 4px 2px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--teal-dark);
+  outline: none;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+.hashtag-input:focus { border-bottom-color: var(--teal); }
+.hashtag-input::placeholder { color: #9bb8b4; font-weight: 400; }
+
+/* ─── 톺아보기 SECTION ─── */
+.topic-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.topic-tab-btn {
+  padding: 8px 16px;
+  border-radius: 24px;
+  border: 2px solid var(--teal-mid);
+  background: white;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.topic-tab-btn:hover { border-color: var(--teal); color: var(--teal); }
+.topic-tab-btn.active {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: white;
+}
+
+.topic-panel { display: none; }
+.topic-panel.active { display: block; animation: fadeIn 0.3s ease; }
+
+.topic-context {
+  background: linear-gradient(135deg, var(--teal-light), #d0f0e8);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  border-left: 5px solid var(--teal);
+}
+.topic-context-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teal-dark);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.topic-context p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.topic-context .city-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.city-tag {
+  background: var(--teal);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 5px;
+}
+
+.tq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.tq-card {
+  background: white;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+.tq-head {
+  background: var(--teal-light);
+  border-left: 4px solid var(--teal);
+  padding: 12px 16px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.tq-num {
+  background: var(--teal);
+  color: white;
+  font-size: 12px;
+  font-weight: 900;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.tq-q { font-size: 14px; font-weight: 700; line-height: 1.6; color: var(--text); }
+.tq-answer { padding: 12px 16px; }
+.tq-answer .answer-area { min-height: 70px; }
+
+/* ─── 실천 SECTION ─── */
+.practice-intro {
+  background: linear-gradient(135deg, #1aaa8f, #0d7d67);
+  color: white;
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: 24px;
+}
+.practice-intro h3 {
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 8px;
+  color: #7ef0d9;
+}
+.practice-intro p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.85);
+}
+
+.scale-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.scale-card {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+.scale-head {
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.scale-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.scale-icon.me { background: #e3f2fd; }
+.scale-icon.school { background: #f3e5f5; }
+.scale-icon.local { background: #e8f5e9; }
+.scale-icon.global { background: #fff8e1; }
+.scale-name { font-size: 14px; font-weight: 900; color: var(--text); }
+.scale-sub { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+.scale-body { padding: 4px 18px 18px; }
+.scale-body .answer-area { min-height: 90px; font-size: 13px; }
+
+.commitment-box {
+  background: linear-gradient(135deg, #fff8e1, #fff3cd);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+}
+.commitment-box h3 {
+  font-size: 16px;
+  font-weight: 900;
+  color: #795548;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.commitment-input {
+  width: 100%;
+  border: 2px solid #ffe082;
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #4e342e;
+  outline: none;
+  background: white;
+  transition: border-color 0.2s;
+  margin-bottom: 12px;
+}
+.commitment-input:focus { border-color: var(--accent); }
+.commitment-input::placeholder { color: #bcaaa4; font-weight: 400; }
+
+.commit-action-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.commit-date {
+  flex: 1;
+  min-width: 140px;
+  border: 2px solid #ffe082;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  color: #4e342e;
+  outline: none;
+  background: white;
+}
+.btn-save {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 22px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-save:hover { background: #f57f17; }
+.btn-print {
+  background: var(--teal);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 22px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-print:hover { background: var(--teal-dark); }
+
+/* ─── NAV BUTTONS ─── */
+.nav-row {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.btn-nav {
+  padding: 11px 24px;
+  border-radius: 10px;
+  border: 2px solid var(--teal);
+  background: white;
+  color: var(--teal);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-nav.primary {
+  background: var(--teal);
+  color: white;
+}
+.btn-nav:hover { opacity: 0.85; }
+
+/* ─── NOTE BOX ─── */
+.teacher-note {
+  background: #fff3e0;
+  border: 1px solid #ffe0b2;
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  margin-top: 20px;
+  font-size: 13px;
+  color: #6d4c41;
+  line-height: 1.7;
+}
+.teacher-note strong { color: #bf360c; }
+
+/* ─── PRINT ─── */
+@media print {
+  .flow-bar, .nav-row, .btn-save, .btn-print, .btn-nav { display: none !important; }
+  .section { display: block !important; page-break-before: always; }
+  .section:first-of-type { page-break-before: avoid; }
+  .topic-panel { display: block !important; }
+  body { background: white; }
+  .hero { padding: 32px 24px 28px; }
+  .card { box-shadow: none; border: 1px solid #ddd; }
+}
+
+/* ─── TOAST ─── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--teal-dark);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: all 0.35s;
+  z-index: 999;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+<nav style="background:#1a1a2e;padding:0 20px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:500;box-shadow:0 2px 8px rgba(0,0,0,.3);overflow-x:auto;scrollbar-width:none">
+  <a href="sdgs_융합수업_v4.html" style="font-size:12px;font-weight:700;color:rgba(255,255,255,.55);text-decoration:none;padding:13px 16px;border-bottom:3px solid transparent;white-space:nowrap;flex-shrink:0">🌍 SDGs 융합 수업 전체</a>
+  <span style="color:rgba(255,255,255,.2);padding:0 2px;flex-shrink:0">|</span>
+  <span style="font-size:12px;font-weight:700;color:#fff;padding:13px 16px;border-bottom:3px solid #1aaa8f;white-space:nowrap;flex-shrink:0">📝 영화 〈내일〉 활동지</span>
+</nav>
+
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">🌍 SDGs × 중학교 사회 수업</div>
+  <h1>영화 〈내일〉과<br><em>슬기로운 지구시민</em></h1>
+  <p class="hero-desc">지역 개발과 환경 보존 사이, 우리는 어떤 선택을 해야 할까요? 영화 속 세계 각지의 실천 사례를 탐색하며 나만의 '내 일(My Work)'을 설계해 보세요.</p>
+  <div class="sdg-pills">
+    <span class="sdg-pill pill-11">SDG 11 지속가능 도시</span>
+    <span class="sdg-pill pill-12">SDG 12 책임있는 소비</span>
+    <span class="sdg-pill pill-13">SDG 13 기후변화 대응</span>
+    <span class="pill-std">[9사(지리)12-02]</span>
+  </div>
+</div>
+
+<!-- FLOW BAR -->
+<div class="flow-bar">
+  <div class="flow-inner">
+    <button class="flow-tab active" onclick="showSection('intro', this)">🎬 도입</button>
+    <span class="flow-arrow">›</span>
+    <button class="flow-tab" onclick="showSection('quiz', this)">🔍 곱씹어보기</button>
+    <span class="flow-arrow">›</span>
+    <button class="flow-tab" onclick="showSection('hashtag', this)"># 해시태그</button>
+    <span class="flow-arrow">›</span>
+    <button class="flow-tab" onclick="showSection('topics', this)">🔎 톺아보기</button>
+    <span class="flow-arrow">›</span>
+    <button class="flow-tab" onclick="showSection('practice', this)">✊ 실천 설계</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ══════ 도입 ══════ -->
+  <div id="sec-intro" class="section active">
+    <div class="section-title-block">
+      <div class="section-eyebrow">STEP 01 · 도입</div>
+      <h2>영화 감상 & 이슈 인식</h2>
+    </div>
+
+    <div class="movie-info-box">
+      <div class="movie-poster">🎬</div>
+      <div class="movie-details">
+        <h3>〈내일〉 (Demain)</h3>
+        <p>감독: 시릴 디옹, 멜라니 로랑 · 2015년 · 프랑스</p>
+        <p>러닝타임: 120분 · 전체관람가 · 배급: 플랫폼C</p>
+        <p style="margin-top:8px; font-size:12px; color:rgba(255,255,255,0.65);">출처: 『영화로 알아보는 세계시민교육(중등)』 (유네스코 APCEIU, 2021) p.25~35</p>
+        <div>
+          <span class="movie-tag">🌱 도시농업</span>
+          <span class="movie-tag">💰 지역화폐</span>
+          <span class="movie-tag">📚 대안교육</span>
+          <span class="movie-tag">⚡ 에너지 전환</span>
+          <span class="movie-tag">🏛️ 민주주의</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="question-big">
+      <div class="qlabel">🎯 핵심 탐구 질문</div>
+      <p>지역 개발과 환경 보존, 둘 다 이룰 수 있을까?<br>영화 속 사람들은 어떤 방법을 찾아냈을까?</p>
+    </div>
+
+    <div class="achievement-card">
+      <div class="act-label">
+        📌 관련 성취기준
+        <span class="act-code">[9사(지리)12-02]</span>
+      </div>
+      <p>지역 개발과 환경 보존을 둘러싼 <strong>글로컬 환경 이슈</strong>에 관심을 갖고, 자신의 웰빙 및 공동체의 지속가능한 발전을 위해 <strong>참여하고 실천</strong>한다.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎥 영화 소개</div>
+      <p style="font-size:14px; line-height:1.85; color:var(--text-muted);">
+        2012년 영국 과학잡지 <em>Nature</em>에 충격적인 기사가 발표됩니다. "지구 생명체의 절반이 사라질 수 있다"는 내용이었습니다. 이에 시릴 디옹 감독과 멜라니 로랑은 전 세계를 돌아다니며 물었습니다. <strong>"그렇다면 우리는 무엇을 해야 할까?"</strong><br><br>
+        농업, 에너지, 경제, 민주주의, 교육 — 다섯 가지 분야에서 세계 각지 사람들이 만들어 가는 <strong>지속가능한 내일의 이야기</strong>를 담은 다큐멘터리입니다.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🌐 등장 사례 미리 보기</div>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:12px; margin-top:8px;">
+        <div style="background:var(--teal-light); border-radius:10px; padding:14px; text-align:center;">
+          <div style="font-size:24px; margin-bottom:6px;">🌿</div>
+          <div style="font-weight:700; font-size:13px; margin-bottom:4px;">도시농업</div>
+          <div style="font-size:11px; color:var(--text-muted);">미국 디트로이트<br>영국 토드모던<br>프랑스 노르망디</div>
+        </div>
+        <div style="background:#f3e5f5; border-radius:10px; padding:14px; text-align:center;">
+          <div style="font-size:24px; margin-bottom:6px;">💰</div>
+          <div style="font-weight:700; font-size:13px; margin-bottom:4px;">지역화폐</div>
+          <div style="font-size:11px; color:var(--text-muted);">스위스 비르(WIR)<br>영국 브리스톨 파운드</div>
+        </div>
+        <div style="background:#e8f5e9; border-radius:10px; padding:14px; text-align:center;">
+          <div style="font-size:24px; margin-bottom:6px;">⚡</div>
+          <div style="font-weight:700; font-size:13px; margin-bottom:4px;">에너지 전환</div>
+          <div style="font-size:11px; color:var(--text-muted);">덴마크 코펜하겐<br>독일 협동조합 발전소</div>
+        </div>
+        <div style="background:#fff8e1; border-radius:10px; padding:14px; text-align:center;">
+          <div style="font-size:24px; margin-bottom:6px;">📚</div>
+          <div style="font-weight:700; font-size:13px; margin-bottom:4px;">대안교육</div>
+          <div style="font-size:11px; color:var(--text-muted);">핀란드 교육 혁신<br>인도 쿠탐비캄 마을</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-nav primary" onclick="showSection('quiz', document.querySelectorAll('.flow-tab')[1])">다음: 곱씹어보기 →</button>
+    </div>
+  </div>
+
+  <!-- ══════ 곱씹어보기 ══════ -->
+  <div id="sec-quiz" class="section">
+    <div class="section-title-block">
+      <div class="section-eyebrow">STEP 02 · 곱씹어보기</div>
+      <h2>영화 내용 확인하기</h2>
+    </div>
+
+    <div class="q-grid">
+      <div class="q-card">
+        <div class="q-header">
+          <div class="q-num">Q1</div>
+          <div class="q-text">영국 토드모던(Todmorden)시의 공동체 텃밭 만들기 프로젝트명은 무엇인가요?</div>
+        </div>
+        <div class="q-body">
+          <textarea class="answer-area" placeholder="영화에서 본 내용을 바탕으로 답해 보세요."></textarea>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-header">
+          <div class="q-num">Q2</div>
+          <div class="q-text">지구가 6차 대멸종 위기에 처한 원인은 무엇인가요?</div>
+        </div>
+        <div class="q-body">
+          <textarea class="answer-area" placeholder="영화 도입부의 내용을 떠올려 보세요."></textarea>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-header">
+          <div class="q-num">Q3</div>
+          <div class="q-text">스위스 비르(WIR) 은행에서 만든 화폐는 무엇인가요?</div>
+        </div>
+        <div class="q-body">
+          <textarea class="answer-area" placeholder="경제 파트에서 소개된 지역화폐를 떠올려 보세요."></textarea>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-header">
+          <div class="q-num">Q4</div>
+          <div class="q-text">2009년 시민들이 정부, 은행, 대기업의 유착을 반대하여 거리 시위를 했던 나라는 어디인가요?</div>
+        </div>
+        <div class="q-body">
+          <textarea class="answer-area" placeholder="민주주의 파트의 내용을 떠올려 보세요."></textarea>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-header">
+          <div class="q-num">Q5</div>
+          <div class="q-text">영화의 마지막에서 핀란드의 교장선생님은 학생들에게 무엇을 가르치고자 하나요?</div>
+        </div>
+        <div class="q-body">
+          <textarea class="answer-area" placeholder="교육 파트에서 핀란드 학교의 모습을 떠올려 보세요."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-nav" onclick="showSection('intro', document.querySelectorAll('.flow-tab')[0])">← 이전</button>
+      <button class="btn-nav primary" onclick="showSection('hashtag', document.querySelectorAll('.flow-tab')[2])">다음: 해시태그 활동 →</button>
+    </div>
+  </div>
+
+  <!-- ══════ 해시태그 ══════ -->
+  <div id="sec-hashtag" class="section">
+    <div class="section-title-block">
+      <div class="section-eyebrow">STEP 03 · 해시태그로 표현해요</div>
+      <h2>인물을 해시태그로 정리하기</h2>
+    </div>
+
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-label">📝 활동 안내</div>
+      <p style="font-size:14px; line-height:1.85; color:var(--text-muted);">영화 속 등장 인물들을 소개하는 <strong>해시태그를 3개씩</strong> 작성해 보세요. 그 인물이 어떤 생각을 가지고 있고, 무엇을 실천하는지 핵심 키워드로 표현해 보세요!</p>
+    </div>
+
+    <div class="person-grid">
+      <!-- 롭 홉킨스 -->
+      <div class="person-card">
+        <div class="person-img">🌱</div>
+        <div class="person-name-bar">
+          롭 홉킨스 (Rob Hopkins)
+          <small>영국 · 전환마을 운동가</small>
+        </div>
+        <div class="hashtag-fields">
+          <div class="hashtag-row">
+            <span class="hashtag-prefix">#</span>
+            <input type="text" class="hashtag-input" placeholder="키워드를 입력하세요">
+          </div>
+          <div class="hashtag-row">
+            <span class="hashtag-prefix">#</span>
+            <input type="text" class="hashtag-input" placeholder="키워드를 입력하세요">
+          </div>
+          <div class="hashtag-row">
+            <span class="hashtag-prefix">#</span>
+            <input type="text" class="hashtag-input" placeholder="키워드를 입력하세요">
+          </div>
+        </div>
+      </div>
+
+      <!-- 반다나 시바 -->
+      <div class="person-card">
+        <div class="person-img">🌾</div>
+        <div class="person-name-bar">
+          반다나 시바 (Vandana Shiva)
+          <small>인도 · 환경운동가·농부</small>
+        </div>
+        <div class="hashtag-fields">
+          <div class="hashtag-row">
+            <span class="hashtag-prefix">#</span>
+            <input type="text" class="hashtag-input" placeholder="키워드를 입력하세요">
+          </div>
+          <div class="hashtag-row">
+            <span class="hashtag-prefix">#</span>
+            <input type="text" class="hashtag-input" placeholder="키워드를 입력하세요">
+          </div>
+          <div class="hashtag-row">
+            <span class="hashtag-prefix">#</span>
+            <input type="text" class="hashtag-input" placeholder="키워드를 입력하세요">
+          </div>
+        </div>
+      </div>
+
+      <!-- 제레미 리프킨 -->
+      <div class="person-card">
+        <div class="person-img">📖</div>
+        <div class="person-name-bar">
+          제레미 리프킨 (Jeremy Rifkin)
+          <small>미국 · 경제학자·사회사상가</small>
+        </div>
+        <div class="hashtag-fields">
+          <div class="hashtag-row">
+            <span class="hashtag-prefix">#</span>
+            <input type="text" class="hashtag-input" placeholder="키워드를 입력하세요">
+          </div>
+          <div class="hashtag-row">
+            <span class="hashtag-prefix">#</span>
+            <input type="text" class="hashtag-input" placeholder="키워드를 입력하세요">
+          </div>
+          <div class="hashtag-row">
+            <span class="hashtag-prefix">#</span>
+            <input type="text" class="hashtag-input" placeholder="키워드를 입력하세요">
+          </div>
+        </div>
+      </div>
+
+      <!-- 엘랑고 랑가스와미 -->
+      <div class="person-card">
+        <div class="person-img">🏘️</div>
+        <div class="person-name-bar">
+          엘랑고 랑가스와미
+          <small>인도 · 쿠탐비캄 마을 시장</small>
+        </div>
+        <div class="hashtag-fields">
+          <div class="hashtag-row">
+            <span class="hashtag-prefix">#</span>
+            <input type="text" class="hashtag-input" placeholder="키워드를 입력하세요">
+          </div>
+          <div class="hashtag-row">
+            <span class="hashtag-prefix">#</span>
+            <input type="text" class="hashtag-input" placeholder="키워드를 입력하세요">
+          </div>
+          <div class="hashtag-row">
+            <span class="hashtag-prefix">#</span>
+            <input type="text" class="hashtag-input" placeholder="키워드를 입력하세요">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-nav" onclick="showSection('quiz', document.querySelectorAll('.flow-tab')[1])">← 이전</button>
+      <button class="btn-nav primary" onclick="showSection('topics', document.querySelectorAll('.flow-tab')[3])">다음: 톺아보기 →</button>
+    </div>
+  </div>
+
+  <!-- ══════ 톺아보기 ══════ -->
+  <div id="sec-topics" class="section">
+    <div class="section-title-block">
+      <div class="section-eyebrow">STEP 04 · 톺아보기</div>
+      <h2>사례 깊이 들여다보기</h2>
+    </div>
+
+    <div class="topic-tabs">
+      <button class="topic-tab-btn active" onclick="showTopic('t1', this)">🌿 1. 도시농업</button>
+      <button class="topic-tab-btn" onclick="showTopic('t2', this)">⚡ 2. 에너지 전환</button>
+      <button class="topic-tab-btn" onclick="showTopic('t3', this)">💰 3. 지역화폐</button>
+      <button class="topic-tab-btn" onclick="showTopic('t4', this)">🏛️ 4. 지역민주주의</button>
+    </div>
+
+    <!-- 톺아보기 1 - 도시농업 -->
+    <div id="topic-t1" class="topic-panel active">
+      <div class="topic-context">
+        <div class="topic-context-label">📍 영화 속 사례</div>
+        <div class="city-tags">
+          <span class="city-tag">미국 디트로이트</span>
+          <span class="city-tag">영국 토드모던</span>
+          <span class="city-tag">프랑스 노르망디</span>
+        </div>
+        <p>미국 디트로이트시, 영국 토드모던시, 프랑스 노르망디 지역에서는 도시농장과 생산성이 높은 소규모 농장을 운영합니다.</p>
+      </div>
+      <div class="tq-list">
+        <div class="tq-card">
+          <div class="tq-head">
+            <div class="tq-num">Q1</div>
+            <div class="tq-q">디트로이트는 자동차 산업의 쇠퇴로 일자리가 줄며 가난해진 시민들이 직접 신선한 먹거리를 키웁니다. 우리나라에서도 같은 상황에 적용 가능할까요? 그렇게 추측하는 이유는 무엇인가요?</div>
+          </div>
+          <div class="tq-answer"><textarea class="answer-area" placeholder="나의 생각을 자유롭게 써 보세요."></textarea></div>
+        </div>
+        <div class="tq-card">
+          <div class="tq-head">
+            <div class="tq-num">Q2</div>
+            <div class="tq-q">토드모던시의 시민들은 우리 지역에서부터 지구를 위한 실천을 시작합니다. 우리 동네에서 실천하는 활동이 지구 환경에 영향력이 있을까요? 그렇게 생각하는 이유는 무엇인가요?</div>
+          </div>
+          <div class="tq-answer"><textarea class="answer-area" placeholder="나의 생각을 자유롭게 써 보세요."></textarea></div>
+        </div>
+        <div class="tq-card">
+          <div class="tq-head">
+            <div class="tq-num">Q3</div>
+            <div class="tq-q">노르망디 지역의 퍼머컬처(Permaculture)는 친환경적이고 생산성이 높습니다. 우리나라에서도 퍼머컬처가 성행할 수 있을까요? 그렇게 판단하는 이유는 무엇인가요?</div>
+          </div>
+          <div class="tq-answer"><textarea class="answer-area" placeholder="나의 생각을 자유롭게 써 보세요."></textarea></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 톺아보기 2 - 에너지 전환 -->
+    <div id="topic-t2" class="topic-panel">
+      <div class="topic-context">
+        <div class="topic-context-label">📍 영화 속 사례</div>
+        <div class="city-tags">
+          <span class="city-tag">덴마크 코펜하겐</span>
+          <span class="city-tag">독일 협동조합</span>
+        </div>
+        <p>덴마크 코펜하겐시에는 시청과 주민들이 공동 투자한 풍력발전소가 있습니다. 덴마크에서는 약 2만 명이 풍력발전에 대한 지분을 갖고 있습니다. 독일은 전기의 대부분을 작은 회사들과 민주적 협동조합에서 생산합니다.</p>
+      </div>
+      <div class="tq-list">
+        <div class="tq-card">
+          <div class="tq-head">
+            <div class="tq-num">Q1</div>
+            <div class="tq-q">우리나라의 발전소는 공기업인 한국전력공사에서 대부분 운영하며, 일부 민간사업자들도 운영하고 있습니다. 우리나라 지역별 발전소의 주인은 누가 되었으면 하나요? 그렇게 생각하는 이유는 무엇인가요?</div>
+          </div>
+          <div class="tq-answer"><textarea class="answer-area" placeholder="나의 생각을 자유롭게 써 보세요."></textarea></div>
+        </div>
+        <div class="tq-card">
+          <div class="tq-head">
+            <div class="tq-num">Q2</div>
+            <div class="tq-q">지역 발전소 설립에 투자할 수 있는 여건이 된다면, 투자할 의향이 있나요? 그렇게 선택한 이유는 무엇인가요?</div>
+          </div>
+          <div class="tq-answer"><textarea class="answer-area" placeholder="나의 생각을 자유롭게 써 보세요."></textarea></div>
+        </div>
+        <div class="tq-card">
+          <div class="tq-head">
+            <div class="tq-num">Q3</div>
+            <div class="tq-q">한국판 뉴딜 중, '그린 뉴딜'에서 신재생에너지를 늘린다고 합니다. 이러한 정책을 이루려면 무엇을 전제로 해야 할까요? 그러한 전제가 필요할 까닭은 무엇인가요?</div>
+          </div>
+          <div class="tq-answer"><textarea class="answer-area" placeholder="나의 생각을 자유롭게 써 보세요."></textarea></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 톺아보기 3 - 지역화폐 -->
+    <div id="topic-t3" class="topic-panel">
+      <div class="topic-context">
+        <div class="topic-context-label">📍 영화 속 사례</div>
+        <div class="city-tags">
+          <span class="city-tag">스위스 비르(WIR) 은행</span>
+          <span class="city-tag">영국 브리스톨 파운드</span>
+        </div>
+        <p>경제학자 베르나르 리에테르(Bernard Lietaer)는 모든 국가가 국가 유일의 화폐 단위를 만들고 은행시스템으로 이자를 만든다고 합니다. 하지만 영국의 몇몇 지역에서는 지역화폐를 사용합니다. 경제 취약 지역에 경제 위기가 올 때, 지역화폐 제도가 해결책이 될 수 있기 때문입니다.</p>
+      </div>
+      <div class="tq-list">
+        <div class="tq-card">
+          <div class="tq-head">
+            <div class="tq-num">Q1</div>
+            <div class="tq-q">우리나라는 한국은행에서 돈을 발행하고 한국조폐공사에서 돈을 인쇄합니다. 여러분은 우리나라의 화폐 생산 권리가 누구에게 있어야 한다고 생각하나요? 그렇게 생각하는 이유는 무엇인가요?</div>
+          </div>
+          <div class="tq-answer"><textarea class="answer-area" placeholder="나의 생각을 자유롭게 써 보세요."></textarea></div>
+        </div>
+        <div class="tq-card">
+          <div class="tq-head">
+            <div class="tq-num">Q2</div>
+            <div class="tq-q">우리 지역에서 지역화폐를 발행하는 것에 동의하나요? 그렇게 주장하는 이유는 무엇인가요?</div>
+          </div>
+          <div class="tq-answer"><textarea class="answer-area" placeholder="나의 생각을 자유롭게 써 보세요."></textarea></div>
+        </div>
+        <div class="tq-card">
+          <div class="tq-head">
+            <div class="tq-num">Q3</div>
+            <div class="tq-q">전 세계 공용화폐가 생긴다면 세계의 경제는 어떻게 변할까요? 그렇게 예상하는 이유는 무엇인가요?</div>
+          </div>
+          <div class="tq-answer"><textarea class="answer-area" placeholder="나의 생각을 자유롭게 써 보세요."></textarea></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 톺아보기 4 - 지역민주주의 -->
+    <div id="topic-t4" class="topic-panel">
+      <div class="topic-context">
+        <div class="topic-context-label">📍 영화 속 사례</div>
+        <div class="city-tags">
+          <span class="city-tag">인도 쿠탐비캄(Kuthambakkam)</span>
+        </div>
+        <p>인도 대부분의 지역은 부패와 불평등이 가득하지만, 쿠탐비캄(Kuthambakkam) 지역에는 혁명적인 지역민주주의의 사례가 있습니다. 이곳의 시장은 최하위 계급에도 들기 못하는 불가촉천민입니다. 그는 주민참여로 마을을 재정비하고, 대부분의 아이들을 학교에 보내고, 여성을 위한 일자리를 마련합니다.</p>
+      </div>
+      <div class="tq-list">
+        <div class="tq-card">
+          <div class="tq-head">
+            <div class="tq-num">Q1</div>
+            <div class="tq-q">내가 만약, 인도의 불가촉천민으로서 차별대우를 받는다면 어떠한 생각과 감정이 들까요?</div>
+          </div>
+          <div class="tq-answer"><textarea class="answer-area" placeholder="나의 생각을 자유롭게 써 보세요."></textarea></div>
+        </div>
+        <div class="tq-card">
+          <div class="tq-head">
+            <div class="tq-num">Q2</div>
+            <div class="tq-q">인도에서 여성의 사회적 지위는 남성에 비해 상대적으로 낮습니다. 내가 인도의 여성이라면, 가족의 반대와 성차별 속에서 직장을 다니겠다고 주장할 수 있을까요? 그렇게 결정한 이유는 무엇인가요?</div>
+          </div>
+          <div class="tq-answer"><textarea class="answer-area" placeholder="나의 생각을 자유롭게 써 보세요."></textarea></div>
+        </div>
+        <div class="tq-card">
+          <div class="tq-head">
+            <div class="tq-num">Q3</div>
+            <div class="tq-q">내가 인도의 최상위 계급이라면, 최하층민과 거주지를 공유할 의향이 있나요? 그렇게 선택한 이유는 무엇인가요?</div>
+          </div>
+          <div class="tq-answer"><textarea class="answer-area" placeholder="나의 생각을 자유롭게 써 보세요."></textarea></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-nav" onclick="showSection('hashtag', document.querySelectorAll('.flow-tab')[2])">← 이전</button>
+      <button class="btn-nav primary" onclick="showSection('practice', document.querySelectorAll('.flow-tab')[4])">다음: 실천 설계 →</button>
+    </div>
+  </div>
+
+  <!-- ══════ 실천 설계 ══════ -->
+  <div id="sec-practice" class="section">
+    <div class="section-title-block">
+      <div class="section-eyebrow">STEP 05 · 정리</div>
+      <h2>나만의 '내 일(My Work)' 설계하기</h2>
+    </div>
+
+    <div class="practice-intro">
+      <h3>✊ 이제 나의 차례!</h3>
+      <p>영화 속 사람들은 각자의 자리에서 지속가능한 내일을 만들어 갔습니다.<br>나는 어디서, 어떻게 시작할 수 있을까요? 구체적이고 실천 가능한 아이디어를 써 보세요.</p>
+    </div>
+
+    <div class="scale-grid">
+      <div class="scale-card">
+        <div class="scale-head">
+          <div class="scale-icon me">🧍</div>
+          <div>
+            <div class="scale-name">나 (개인)</div>
+            <div class="scale-sub">일상 속 작은 변화</div>
+          </div>
+        </div>
+        <div class="scale-body">
+          <textarea class="answer-area" placeholder="예) 일주일에 3번 대중교통 이용하기&#10;예) 음식물 쓰레기 줄이기"></textarea>
+        </div>
+      </div>
+      <div class="scale-card">
+        <div class="scale-head">
+          <div class="scale-icon school">🏫</div>
+          <div>
+            <div class="scale-name">학교 (공동체)</div>
+            <div class="scale-sub">친구들과 함께</div>
+          </div>
+        </div>
+        <div class="scale-body">
+          <textarea class="answer-area" placeholder="예) 교내 텃밭 가꾸기 동아리&#10;예) 분리수거 캠페인 진행"></textarea>
+        </div>
+      </div>
+      <div class="scale-card">
+        <div class="scale-head">
+          <div class="scale-icon local">🏙️</div>
+          <div>
+            <div class="scale-name">지역 (마을)</div>
+            <div class="scale-sub">우리 동네에서</div>
+          </div>
+        </div>
+        <div class="scale-body">
+          <textarea class="answer-area" placeholder="예) 지역화폐 사용 캠페인&#10;예) 마을 공동 텃밭 참여"></textarea>
+        </div>
+      </div>
+      <div class="scale-card">
+        <div class="scale-head">
+          <div class="scale-icon global">🌍</div>
+          <div>
+            <div class="scale-name">지구 (세계)</div>
+            <div class="scale-sub">더 넓은 시각으로</div>
+          </div>
+        </div>
+        <div class="scale-body">
+          <textarea class="answer-area" placeholder="예) 환경 관련 청원 서명&#10;예) 공정무역 제품 소비"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="commitment-box">
+      <h3>🌟 나의 실천 다짐</h3>
+      <p style="font-size:13px; color:#795548; margin-bottom:12px;">가장 먼저, 가장 확실하게 실천할 수 있는 한 가지를 골라 구체적으로 써 보세요.</p>
+      <input type="text" class="commitment-input" id="commitText" placeholder="예) 매주 화요일 급식 잔반 없애기 — 이번 달부터 시작하겠습니다!">
+      <div class="commit-action-row">
+        <input type="date" class="commit-date" id="commitDate" title="실천 시작일">
+        <button class="btn-save" onclick="saveCommit()">💾 다짐 저장</button>
+        <button class="btn-print" onclick="window.print()">🖨️ 인쇄하기</button>
+      </div>
+    </div>
+
+    <div class="teacher-note">
+      ✏️ <strong>교사 유의점:</strong> 이 성취기준의 핵심 동사는 <strong>"참여하고 실천한다"</strong>입니다. 영화 감상으로 끝내지 말고, 학생이 직접 실천 계획을 세우고 최소 1가지를 실행하는 과제와 연결하세요. 지역 개발과 환경 보존의 갈등을 단순히 '환경이 옳다'로 결론 내리지 않고 <strong>다양한 입장을 균형 있게</strong> 다루는 것이 중요합니다.
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-nav" onclick="showSection('topics', document.querySelectorAll('.flow-tab')[3])">← 이전</button>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.flow-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showTopic(id, btn) {
+  document.querySelectorAll('.topic-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.topic-tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('topic-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+function saveCommit() {
+  const text = document.getElementById('commitText').value.trim();
+  const date = document.getElementById('commitDate').value;
+  if (!text) { showToast('⚠️ 다짐 내용을 입력해 주세요!'); return; }
+  const dateStr = date ? ` (${date} 시작)` : '';
+  showToast(`✅ 다짐이 저장되었습니다!${dateStr}`);
+}
+
+// 자동 저장 (localStorage)
+function autoSave() {
+  const data = {};
+  document.querySelectorAll('textarea').forEach((el, i) => { data['ta_' + i] = el.value; });
+  document.querySelectorAll('.hashtag-input').forEach((el, i) => { data['ht_' + i] = el.value; });
+  data['commit'] = document.getElementById('commitText').value;
+  data['commitDate'] = document.getElementById('commitDate').value;
+  try { localStorage.setItem('naeil_lesson', JSON.stringify(data)); } catch(e) {}
+}
+
+function autoLoad() {
+  try {
+    const raw = localStorage.getItem('naeil_lesson');
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    document.querySelectorAll('textarea').forEach((el, i) => { if (data['ta_' + i]) el.value = data['ta_' + i]; });
+    document.querySelectorAll('.hashtag-input').forEach((el, i) => { if (data['ht_' + i]) el.value = data['ht_' + i]; });
+    if (data['commit']) document.getElementById('commitText').value = data['commit'];
+    if (data['commitDate']) document.getElementById('commitDate').value = data['commitDate'];
+  } catch(e) {}
+}
+
+document.addEventListener('input', autoSave);
+window.addEventListener('load', autoLoad);
+</script>
+</body>
+</html>
