@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>지구촌 이웃과 함께 성장하는 프로젝트 · 활동지</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ── 화면용 기본 스타일 ── */
+:root {
+  --sdg1: #e5243b;
+  --sdg17: #19486a;
+  --bg: #f0f2f5;
+  --white: #fff;
+  --text: #1a1a2e;
+  --muted: #667085;
+  --border: #d0d5dd;
+  --write-bg: #fafbfc;
+  --write-border: #c8d0dc;
+  --radius: 10px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ── 저장 버튼 바 (화면에서만 보임) ── */
+.save-bar {
+  background: #1a1a2e;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.save-bar-title {
+  color: rgba(255,255,255,.7);
+  font-size: 13px;
+  font-weight: 500;
+}
+.save-bar-btns { display: flex; gap: 10px; }
+.save-btn {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all .18s;
+}
+.save-btn.pdf {
+  background: var(--sdg1);
+  color: white;
+}
+.save-btn.pdf:hover { background: #c0132a; }
+.save-btn.img {
+  background: rgba(255,255,255,.12);
+  color: rgba(255,255,255,.9);
+  border: 1px solid rgba(255,255,255,.2);
+}
+.save-btn.img:hover { background: rgba(255,255,255,.2); }
+
+/* ── A4 페이지 래퍼 ── */
+.page-wrap {
+  max-width: 794px;
+  margin: 28px auto 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.page {
+  background: var(--white);
+  width: 100%;
+  padding: 36px 44px 40px;
+  box-shadow: 0 4px 24px rgba(0,0,0,.1);
+  position: relative;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+/* 페이지 번호 */
+.page-num {
+  position: absolute;
+  bottom: 16px;
+  right: 24px;
+  font-size: 11px;
+  color: #bbb;
+}
+
+/* ── 헤더 ── */
+.doc-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2.5px solid var(--sdg17);
+}
+.doc-header-left h1 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--sdg17);
+  margin-bottom: 5px;
+}
+.doc-header-left .sub {
+  font-size: 12px;
+  color: var(--muted);
+}
+.doc-header-right {
+  text-align: right;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+.sdg-chips { display: flex; gap: 5px; justify-content: flex-end; margin-bottom: 5px; }
+.sdg-chip {
+  font-size: 10px; font-weight: 900;
+  padding: 3px 9px; border-radius: 4px;
+  color: white;
+}
+.std-code {
+  font-size: 10px;
+  font-family: monospace;
+  background: #eef2ff;
+  color: #3730a3;
+  padding: 2px 7px;
+  border-radius: 3px;
+  border: 1px solid #c7d2fe;
+  display: inline-block;
+}
+
+/* ── 섹션 제목 ── */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 22px 0 12px;
+}
+.section-step {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  color: white;
+  text-transform: uppercase;
+}
+.step-intro { background: #1d6fa4; }
+.step-main  { background: #2e7d32; }
+.step-wrap  { background: #c25e00; }
+
+.section-title h2 {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.section-desc {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+/* ── 박스들 ── */
+.info-box {
+  background: #f8f9ff;
+  border-left: 3.5px solid var(--sdg17);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 14px;
+  color: #1e3a8a;
+}
+.info-box strong { color: var(--sdg17); }
+
+.case-box {
+  background: #fff1f2;
+  border: 1.5px solid #fecdd3;
+  border-radius: 8px;
+  padding: 13px 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+.case-box .case-title {
+  font-size: 11px; font-weight: 900; color: #dc2626;
+  letter-spacing: 1px; margin-bottom: 6px;
+}
+.case-box ul { padding-left: 18px; }
+.case-box ul li { margin-bottom: 3px; }
+
+/* ── 쓰기 칸 ── */
+.write-box {
+  background: var(--write-bg);
+  border: 1.5px solid var(--write-border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+}
+.write-box .write-q {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.55;
+}
+.write-box .write-q .q-num {
+  display: inline-block;
+  background: var(--sdg17);
+  color: white;
+  font-size: 10px;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-right: 6px;
+}
+.write-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.write-line {
+  height: 30px;
+  border-bottom: 1px solid #dde1e9;
+  width: 100%;
+}
+.write-line:last-child { border-bottom: none; }
+
+/* 짧은 쓰기 칸 */
+.write-short {
+  height: 30px;
+  border-bottom: 1.5px solid var(--write-border);
+  width: 100%;
+  margin-bottom: 2px;
+}
+.write-label {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+/* 비교 표 */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+.compare-table th {
+  padding: 9px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .3px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.compare-table th.bad  { background: #fee2e2; color: #dc2626; }
+.compare-table th.good { background: #dcfce7; color: #16a34a; }
+.compare-table th.item { background: #f8f9fa; color: var(--muted); width: 90px; }
+.compare-table td {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: 1.55;
+}
+.compare-table td.item-label {
+  font-weight: 700;
+  font-size: 12px;
+  background: #f8f9fa;
+  text-align: center;
+  color: #444;
+}
+
+/* 역할 카드 */
+.role-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.role-card {
+  border-radius: 8px;
+  padding: 12px 14px;
+  border: 1.5px solid;
+  font-size: 12px;
+}
+.role-card .r-emoji { font-size: 20px; margin-bottom: 5px; display: block; }
+.role-card h4 { font-weight: 700; font-size: 13px; margin-bottom: 3px; }
+.role-card p  { color: var(--muted); line-height: 1.5; font-size: 12px; }
+.role-card.r1 { background: #fef3c7; border-color: #fcd34d; }
+.role-card.r2 { background: #e0f2fe; border-color: #7dd3fc; }
+.role-card.r3 { background: #fce7f3; border-color: #f9a8d4; }
+.role-card.r4 { background: #f0fdf4; border-color: #86efac; }
+
+/* 원칙 목록 */
+.principle-list { list-style: none; padding: 0; margin-bottom: 14px; }
+.principle-list li {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 9px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.principle-list li:last-child { border-bottom: none; }
+.p-num {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--sdg17);
+  color: white;
+  font-size: 10px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+}
+
+/* 프로젝트 선택 */
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.project-option {
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 11px 13px;
+  font-size: 12px;
+  display: flex; gap: 8px; align-items: flex-start;
+}
+.project-option .p-ico { font-size: 18px; flex-shrink: 0; }
+.project-option h4 { font-weight: 700; font-size: 12px; margin-bottom: 2px; }
+.project-option p  { color: var(--muted); line-height: 1.45; }
+
+/* 회의 순서 */
+.agenda-list { list-style: none; padding: 0; margin-bottom: 14px; }
+.agenda-list li {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 8px 0;
+  border-bottom: 1px dotted #e0e0e0;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.agenda-list li:last-child { border-bottom: none; }
+.a-step {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #eee;
+  color: #555;
+  font-size: 10px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+}
+.a-time { font-size: 11px; color: var(--muted); margin-right: 4px; }
+
+/* 협약서 */
+.contract-box {
+  border: 2px solid var(--sdg17);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+}
+.contract-box .c-title {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--sdg17);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #c0cdd8;
+}
+.contract-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.contract-row .c-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--sdg17);
+  width: 80px;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+.contract-row .c-line {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.c-write-line {
+  height: 26px;
+  border-bottom: 1px solid var(--write-border);
+}
+
+/* 성찰 별점 */
+.reflect-stars {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+.star { font-size: 22px; color: #ddd; cursor: default; }
+
+/* 구분선 */
+.divider {
+  height: 1px;
+  background: #eee;
+  margin: 20px 0;
+}
+
+/* 작은 안내 */
+.hint {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+
+/* ══════════════════════════════
+   인쇄 / PDF 저장용 스타일
+══════════════════════════════ */
+@media print {
+  @page {
+    size: A4;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  body { background: white; font-size: 13px; }
+
+  .save-bar { display: none !important; }
+
+  .page-wrap {
+    max-width: 100%;
+    margin: 0;
+    gap: 0;
+  }
+
+  .page {
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0 0 20px;
+    margin-bottom: 0;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: avoid; }
+
+  .page-num { display: block; }
+
+  /* 쓰기 칸 인쇄 최적화 */
+  .write-line { height: 28px; }
+  .write-short { height: 28px; }
+}
+</style>
+</head>
+<body>
+<nav style="background:#1a1a2e;padding:0 20px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:500;box-shadow:0 2px 8px rgba(0,0,0,.3);overflow-x:auto;scrollbar-width:none">
+  <a href="sdgs_융합수업_v4.html" style="font-size:12px;font-weight:700;color:rgba(255,255,255,.55);text-decoration:none;padding:13px 16px;border-bottom:3px solid transparent;white-space:nowrap;flex-shrink:0">🌍 SDGs 융합 수업 전체</a>
+  <span style="color:rgba(255,255,255,.2);padding:0 2px;flex-shrink:0">|</span>
+  <span style="font-size:12px;font-weight:700;color:#fff;padding:13px 16px;border-bottom:3px solid #e5243b;white-space:nowrap;flex-shrink:0">📝 지구촌 프로젝트 활동지</span>
+</nav>
+
+
+<!-- ── 저장 버튼 바 (화면 전용) ── -->
+<div class="save-bar">
+  <span class="save-bar-title">📄 지구촌 프로젝트 · 학생 활동지</span>
+  <div class="save-bar-btns">
+    <button class="save-btn pdf" onclick="saveAsPDF()">📥 PDF로 저장</button>
+  </div>
+</div>
+
+<div class="page-wrap" id="printArea">
+
+  <!-- ════════ PAGE 1 : 도입 ════════ -->
+  <div class="page" id="page1">
+
+    <div class="doc-header">
+      <div class="doc-header-left">
+        <h1>지구촌 이웃과 함께<br>성장하는 프로젝트</h1>
+        <div class="sub">중학교 사회(지리) · 국제개발협력과 연대 · SDG 1 &amp; 17</div>
+      </div>
+      <div class="doc-header-right">
+        <div class="sdg-chips">
+          <span class="sdg-chip" style="background:#e5243b">SDG 1</span>
+          <span class="sdg-chip" style="background:#19486a">SDG 17</span>
+        </div>
+        <span class="std-code">[9사(지리)04-03]</span>
+      </div>
+    </div>
+
+
+    <div style="background:#f0f4ff;border-radius:8px;padding:11px 16px;margin-bottom:16px;font-size:13px;">
+      <span style="font-size:10px;font-weight:700;letter-spacing:1px;color:#3730a3;display:block;margin-bottom:4px">📋 관련 성취기준 [9사(지리)04-03]</span>
+      지속가능한 발전을 위한 아프리카 각 지역의 노력과 세계 다양한 주체들의 협력 사례를 조사하고, 세계시민으로서 우리가 참여할 수 있는 방안을 모색한다.
+    </div>
+
+    <!-- ★ 수업 시작 전 인식 점검 (v4 웹페이지 도입과 일치) -->
+    <div style="background:#fffde7;border:2px dashed #f9a825;border-radius:10px;padding:14px 16px;margin-bottom:16px;">
+      <div style="font-size:11px;font-weight:700;color:#f57f17;letter-spacing:1px;margin-bottom:8px">✏️ 수업 시작 전 — 내 생각 먼저 써봐요 (나중에 비교할 거예요!)</div>
+      <div style="font-size:14px;font-weight:700;margin-bottom:10px">"아프리카 하면 떠오르는 단어나 이미지를 3가지 써봅시다."</div>
+      <div style="display:flex;gap:10px;">
+        <div style="flex:1;background:white;border:1px solid #fcd34d;border-radius:6px;padding:10px;min-height:44px;font-size:12px;color:#999">①</div>
+        <div style="flex:1;background:white;border:1px solid #fcd34d;border-radius:6px;padding:10px;min-height:44px;font-size:12px;color:#999">②</div>
+        <div style="flex:1;background:white;border:1px solid #fcd34d;border-radius:6px;padding:10px;min-height:44px;font-size:12px;color:#999">③</div>
+      </div>
+      <div style="font-size:11px;color:#888;margin-top:7px">💡 맞고 틀리고가 없어요. 지금 솔직한 생각을 쓰면 됩니다. 수업이 끝난 후 4페이지에서 다시 비교해봐요!</div>
+    </div>
+
+    <!-- 도입 -->
+    <div class="section-title">
+      <span class="section-step step-intro">STEP 01</span>
+      <h2>도입 — '진짜 돕는다는 것'은 무엇일까?</h2>
+    </div>
+    <p class="section-desc">아래 사례들을 읽고, 질문에 답해 봅시다.</p>
+
+    <div class="case-box">
+      <div class="case-title">📌 사례 1 · 아프리카 마을의 우물 펌프</div>
+      선진국 봉사단체가 아프리카 시골 마을에 최신 우물 펌프를 설치해 주었습니다.
+      처음에는 마을 사람들이 깨끗한 물을 마실 수 있어 기뻤지만, 1년 후 펌프가 고장났습니다.
+      수리에 필요한 부품은 수천 킬로미터 떨어진 도시에서만 구할 수 있었고,
+      마을에는 수리할 기술을 가진 사람이 아무도 없었습니다. 펌프는 그대로 방치되었습니다.
+    </div>
+
+    <div class="case-box" style="background:#fff7ed;border-color:#fed7aa">
+      <div class="case-title" style="color:#c2410c">📌 사례 2 · 중고 의류 대량 지원</div>
+      유럽의 한 국가가 아프리카에 중고 의류 수백만 벌을 무료로 보냈습니다.
+      사람들은 처음에는 좋아했지만, 저렴한 중고 의류가 넘쳐나면서 현지 의류 공장들이 하나씩 문을 닫기 시작했습니다.
+      일자리를 잃은 사람들은 오히려 더 어려운 처지에 놓였습니다.
+    </div>
+
+    <!-- 성공 사례 -->
+    <div class="case-box" style="background:#f0fdf4;border-color:#86efac;margin-top:4px">
+      <div class="case-title" style="color:#16a34a">✅ 사례 3 · 르완다 소프트웨어 특성화고 (KOICA, 2021~)</div>
+      한국 정부(KOICA)는 르완다에 소프트웨어 특성화고등학교를 설립할 때, 처음부터 르완다 교육부와 함께 교육과정을 설계했습니다.
+      한국인 교사가 직접 가르치는 대신, <strong>르완다 현지 교사들을 한국으로 초청해 연수</strong>시키고 귀국 후 직접 수업을 맡도록 했습니다.
+      교재도 르완다의 산업 수요와 문화에 맞게 현지화했습니다.
+      그 결과 1회 졸업생 중 여러 명이 미국 주요 대학에 진학했고, 졸업생들이 르완다 IT 기업에 취업해 현지 디지털 산업을 이끌고 있습니다.
+      <strong>외부에서 대신 해준 것이 아니라, 스스로 할 수 있도록 함께 만들어간 것</strong>이 핵심이었습니다.
+    </div>
+
+    <div class="write-box">
+      <div class="write-q"><span class="q-num">Q1</span>사례 1·2와 사례 3을 비교했을 때, 가장 큰 차이점은 무엇인가요? 성공의 핵심 이유를 써봅시다.</div>
+      <div class="write-lines">
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+
+    <div class="write-box">
+      <div class="write-q"><span class="q-num">Q2</span>사례 3처럼 '진짜 도움'이 되려면 어떤 태도가 필요할까요? 내 생각을 써봅시다.</div>
+      <div class="write-lines">
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      💡 <strong>일방적 원조 vs 국제개발협력</strong><br>
+      단순히 물건을 주거나 대신 해주는 것은 '원조'입니다. 반면 <strong>국제개발협력</strong>은 현지 주민의 필요와 의견을 존중하면서 함께 문제를 해결하고, 스스로 자립할 수 있는 능력을 키우는 방식입니다. 르완다 소프트웨어 특성화고 사례처럼, <strong>현지 사람이 주인공이 될 수 있도록 돕는 것</strong>이 핵심입니다.
+    </div>
+
+    <div class="page-num">1 / 4</div>
+  </div>
+
+
+  <!-- ════════ PAGE 2 : 전개 ════════ -->
+  <div class="page" id="page2">
+
+    <div class="section-title" style="margin-top:0">
+      <span class="section-step step-main">STEP 02</span>
+      <h2>전개 — 국제개발협력의 원칙 &amp; 역할 준비</h2>
+    </div>
+
+    <!-- 비교표 -->
+    <p class="section-desc">아래 표를 완성하며 원조와 국제개발협력의 차이를 정리해 봅시다.</p>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th class="item">구분</th>
+          <th class="bad">❌ 일방적 원조</th>
+          <th class="good">✅ 국제개발협력</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item-label">관계</td>
+          <td>주는 쪽 ↔ 받는 쪽 (위아래 관계)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="item-label">방향</td>
+          <td></td>
+          <td>도움받는 나라의 필요와 의견을 반영</td>
+        </tr>
+        <tr>
+          <td class="item-label">목표</td>
+          <td>단기 문제 해결</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="item-label">결과</td>
+          <td></td>
+          <td>지속가능한 자립</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 원칙 -->
+    <p class="section-desc" style="margin-top:16px">국제개발협력이 성공하려면 어떤 원칙이 필요할까요?<br>아래 원칙을 읽고, 내 말로 짧게 설명해 봅시다. <strong>사례 3(르완다 KOICA)에서 이 원칙이 어떻게 나타났는지</strong>도 생각해봐요.</p>
+
+    <ul class="principle-list">
+      <li>
+        <span class="p-num">1</span>
+        <div>
+          <strong>스스로 결정하기(주인의식)</strong> — 도움받는 나라 주민이 스스로 계획을 세우고 결정해야 한다.<br>
+          <span class="write-label">내 말로 정리:</span>
+          <div class="write-short"></div>
+        </div>
+      </li>
+      <li>
+        <span class="p-num">2</span>
+        <div>
+          <strong>진짜 변화가 중요해요(결과 중심)</strong> — 얼마나 많이 줬는지보다 실질적인 변화가 있었는지가 중요하다.<br>
+          <span class="write-label">내 말로 정리:</span>
+          <div class="write-short"></div>
+        </div>
+      </li>
+      <li>
+        <span class="p-num">3</span>
+        <div>
+          <strong>문화 존중</strong> — 현지의 문화, 관습, 환경을 이해하고 그 안에서 작동하는 방식을 찾는다.<br>
+          <span class="write-label">내 말로 정리:</span>
+          <div class="write-short"></div>
+        </div>
+      </li>
+    </ul>
+
+    <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:8px;padding:13px 16px;margin:14px 0 0;">
+      <div style="font-size:11px;font-weight:700;color:#16a34a;margin-bottom:8px">🌍 아프리카의 힘 — 알고 있었나요?</div>
+      <div style="font-size:12px;color:#333;line-height:1.7;margin-bottom:10px">
+        아프리카는 문제가 많은 곳이기도 하지만, 스스로 변화하고 성장하는 <strong>지속가능한 발전의 현장</strong>이기도 합니다.<br>
+        아래 3가지 사례 중 하나를 골라, <strong>먼저 직접 검색해보고</strong> 조사 내용을 써봅시다.
+      </div>
+
+      <!-- 3개 사례 카드 + 링크 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px;font-size:11px">
+        <div style="background:white;border:1px solid #bbf7d0;border-radius:6px;padding:8px">
+          🇷🇼 <strong>르완다</strong><br>
+          <span style="color:#555;line-height:1.5;display:block;margin:3px 0">IT·관광 산업으로 아프리카 싱가포르를 꿈꾸는 나라</span>
+          <div style="font-size:10px;color:#888;background:#f0fdf4;border-radius:4px;padding:4px 6px;margin-top:4px">🔍 검색어: <em>"르완다 IT 교육" "KOICA 르완다"</em></div>
+          <a href="https://koica.go.kr/koica_kr/990/subview.do?enc=Zm5jdDF8QEB8JTJGYmJzJTJGa29pY2Ffa3IlMkYxNTElMkYzODU4MzAlMkZhcnRjbFZpZXcuZG8lM0ZwYWdlJTNEMSUyNnNyY2hDb2x1bW4lM0QlMjZzcmNoV3JkJTNEJTI2YmJzQ2xTZXElM0QlMjZiYnNPcGVuV3JkU2VxJTNEJTI2cmdzQmduZGVTdHIlM0QlMjZyZ3NFbmRkZVN0ciUzRCUyNmlzVmlld01pbmUlM0RmYWxzZSUyNnBhc3N3b3JkJTNEJTI2" target="_blank" style="display:block;margin-top:6px;font-size:10px;color:#16a34a;text-decoration:none;background:#dcfce7;border-radius:4px;padding:4px 7px;text-align:center">📰 KOICA 공식 보도자료 보기 →</a>
+        </div>
+        <div style="background:white;border:1px solid #bbf7d0;border-radius:6px;padding:8px">
+          🇰🇪 <strong>케냐</strong><br>
+          <span style="color:#555;line-height:1.5;display:block;margin:3px 0">실리콘 사바나 — 아프리카의 IT 스타트업 허브</span>
+          <div style="font-size:10px;color:#888;background:#f0fdf4;border-radius:4px;padding:4px 6px;margin-top:4px">🔍 검색어: <em>"케냐 실리콘 사바나" "M-Pesa 모바일"</em></div>
+          <a href="https://brunch.co.kr/@seoryoungkim/127" target="_blank" style="display:block;margin-top:6px;font-size:10px;color:#16a34a;text-decoration:none;background:#dcfce7;border-radius:4px;padding:4px 7px;text-align:center">📰 참고 기사 보기 →</a>
+        </div>
+        <div style="background:white;border:1px solid #bbf7d0;border-radius:6px;padding:8px">
+          🌞 <strong>아프리카 태양광</strong><br>
+          <span style="color:#555;line-height:1.5;display:block;margin:3px 0">한국 기업이 만든 '솔라카우' — 태양광으로 아이들을 학교로</span>
+          <div style="font-size:10px;color:#888;background:#f0fdf4;border-radius:4px;padding:4px 6px;margin-top:4px">🔍 검색어: <em>"솔라카우" "요크 아프리카 태양광"</em></div>
+          <a href="https://futurechosun.com/archives/45744" target="_blank" style="display:block;margin-top:6px;font-size:10px;color:#16a34a;text-decoration:none;background:#dcfce7;border-radius:4px;padding:4px 7px;text-align:center">📰 참고 기사 보기 →</a>
+        </div>
+      </div>
+
+      <div style="font-size:11px;color:#888;background:#f8fffe;border-radius:5px;padding:6px 10px;margin-bottom:10px;border-left:3px solid #86efac">
+        💡 검색 팁: 검색어를 그대로 복사해서 검색해 보세요. 검색이 어려우면 위 <strong>참고 기사</strong>를 클릭해서 읽어보세요!
+      </div>
+
+      <div style="font-size:12px;font-weight:700;margin-bottom:5px">내가 조사한 사례: <span style="border-bottom:1px solid #ccc;display:inline-block;width:120px">&nbsp;</span></div>
+      <div style="font-size:11px;color:#555;margin-bottom:5px">조사 내용 (2~3줄):</div>
+      <div style="height:28px;border-bottom:1px solid #d1d5db;margin-bottom:6px"></div>
+      <div style="height:28px;border-bottom:1px solid #d1d5db;margin-bottom:6px"></div>
+      <div style="height:28px;border-bottom:1px solid #d1d5db"></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 역할 배정 -->
+    <p class="section-desc"><strong>모둠원과 역할을 나눠 봅시다.</strong> 각자 자신의 역할을 선택하고 아래 카드를 확인하세요.</p>
+
+    <div class="role-grid">
+      <div class="role-card r1">
+        <span class="r-emoji">🌍</span>
+        <h4>국제NGO 활동가</h4>
+        <p>현지 조사를 바탕으로 지원 방안 제안. 외부 도움을 연결해 주는 역할.</p>
+        <div style="margin-top:8px">
+          <span class="write-label">담당 모둠원:</span>
+          <div class="write-short"></div>
+        </div>
+      </div>
+      <div class="role-card r2">
+        <span class="r-emoji">👴</span>
+        <h4>마을 대표</h4>
+        <p>마을의 실제 필요와 우선순위를 대변. 문화와 역사적 배경 설명.</p>
+        <div style="margin-top:8px">
+          <span class="write-label">담당 모둠원:</span>
+          <div class="write-short"></div>
+        </div>
+      </div>
+      <div class="role-card r3">
+        <span class="r-emoji">🧑‍🎓</span>
+        <h4>현지 학생</h4>
+        <p>우리 또래의 목소리를 전달. 교육·기술 측면의 필요를 이야기.</p>
+        <div style="margin-top:8px">
+          <span class="write-label">담당 모둠원:</span>
+          <div class="write-short"></div>
+        </div>
+      </div>
+      <div class="role-card r4">
+        <span class="r-emoji">🏛️</span>
+        <h4>정부 담당자</h4>
+        <p>나라 차원의 정책과 예산 현황 설명. 오래 이어질 수 있는지 검토.</p>
+        <div style="margin-top:8px">
+          <span class="write-label">담당 모둠원:</span>
+          <div class="write-short"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="write-box">
+      <div class="write-q"><span class="q-num">Q3</span>내 역할(<span style="text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>)의 입장에서 가장 중요하게 생각하는 것은 무엇인가요?</div>
+      <div class="write-lines">
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+
+    <div class="page-num">2 / 3</div>
+  </div>
+
+
+  <!-- ════════ PAGE 3 : 정리 (프로젝트 선택 + 역할 준비) ════════ -->
+  <div class="page" id="page3">
+
+    <div class="section-title" style="margin-top:0">
+      <span class="section-step step-wrap">STEP 03-①</span>
+      <h2>정리 — 프로젝트 선택 &amp; 역할별 발언 준비</h2>
+    </div>
+
+    <!-- 프로젝트 선택 -->
+    <p class="section-desc">모둠이 함께 협력할 프로젝트 주제를 하나 선택하세요. 아래 6개 중 하나를 고르거나, ⑥번에 직접 새로운 주제를 제안할 수 있습니다.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+      <div class="project-option">
+        <div class="p-ico">☀️</div>
+        <div>
+          <h4>① 태양광 램프 보급</h4>
+          <p>전기 없는 마을에 태양광 램프 지원. 핵심 과제: 고장 시 누가 고치나? 부품은 어디서?</p>
+        </div>
+      </div>
+      <div class="project-option">
+        <div class="p-ico">💧</div>
+        <div>
+          <h4>② 빗물 정수 시스템</h4>
+          <p>현지 재료로 만드는 정수 장치 만드는 법을 함께 배워요. 핵심 과제: 건기엔 어떻게? 누가 관리하나?</p>
+        </div>
+      </div>
+      <div class="project-option">
+        <div class="p-ico">🌱</div>
+        <div>
+          <h4>③ 지속가능 농업 교육</h4>
+          <p>화학비료 대신 퇴비·돌려짓기 농법(윤작) 보급. 핵심 과제: 수확량이 줄면? 농민의 동의는?</p>
+        </div>
+      </div>
+      <div class="project-option">
+        <div class="p-ico">📱</div>
+        <div>
+          <h4>④ 디지털 교육 접근성</h4>
+          <p>오프라인 학습 기기·콘텐츠를 현지 언어로. 핵심 과제: 충전은? 교사 연수는?</p>
+        </div>
+      </div>
+      <div class="project-option">
+        <div class="p-ico">👩‍⚕️</div>
+        <div>
+          <h4>⑤ 마을 건강 도우미 양성</h4>
+          <p>마을 주민 중에서 기초 건강 지식을 가진 도우미를 양성. 핵심 과제: 교육 마친 뒤 급여는? 지속 교육은?</p>
+        </div>
+      </div>
+      <div class="project-option" style="background:#f8f9fa">
+        <div class="p-ico">✏️</div>
+        <div>
+          <h4>⑥ 우리 모둠 직접 제안</h4>
+          <p>새로운 주제:<div class="write-short" style="margin-top:4px"></div>
+          핵심 과제:<div class="write-short"></div></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="write-box">
+      <div class="write-q"><span class="q-num">Q4</span>우리 모둠이 선택한 프로젝트 번호: <span style="text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;</span> — 선택 이유를 써봅시다.</div>
+      <div class="write-lines">
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+
+    <!-- 아프리카 협력 필요 분야 -->
+    <div style="background:#f8f9fa;border:1.5px solid #e0e0e0;border-radius:10px;padding:14px 16px;margin-bottom:14px;">
+      <div style="font-size:11px;font-weight:700;color:#555;letter-spacing:1px;margin-bottom:10px">💡 아프리카에서 협력이 필요한 분야 — ⑥번 직접 제안할 때 참고하세요</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-size:12px;">
+        <div style="background:#fff0f0;border-radius:7px;padding:10px;border:1.5px solid #fca5a5;">
+          <div style="font-size:16px;margin-bottom:4px">💊</div>
+          <div style="font-weight:700;margin-bottom:3px;color:#b91c1c">보건·의료</div>
+          <div style="color:#666;line-height:1.5">말라리아·에볼라 예방, 모자보건, 기초 의약품 접근, 의료 인력 양성</div>
+        </div>
+        <div style="background:#fff7ed;border-radius:7px;padding:10px;border:1.5px solid #fdba74;">
+          <div style="font-size:16px;margin-bottom:4px">📚</div>
+          <div style="font-weight:700;margin-bottom:3px;color:#c2410c">교육·직업훈련</div>
+          <div style="color:#666;line-height:1.5">학교 건립, 교사 양성, 직업기술 교육, 여학생 교육 기회 확대</div>
+        </div>
+        <div style="background:#fefce8;border-radius:7px;padding:10px;border:1.5px solid #fde047;">
+          <div style="font-size:16px;margin-bottom:4px">🌾</div>
+          <div style="font-weight:700;margin-bottom:3px;color:#854d0e">식량·농업</div>
+          <div style="color:#666;line-height:1.5">가뭄 대응 농법, 종자 개량, 식량 저장 기술, 소농 지원</div>
+        </div>
+        <div style="background:#eff6ff;border-radius:7px;padding:10px;border:1.5px solid #93c5fd;">
+          <div style="font-size:16px;margin-bottom:4px">💧</div>
+          <div style="font-weight:700;margin-bottom:3px;color:#1d4ed8">물·위생</div>
+          <div style="color:#666;line-height:1.5">안전한 식수 공급, 위생 시설 설치, 수질 오염 방지</div>
+        </div>
+        <div style="background:#f0fdf4;border-radius:7px;padding:10px;border:1.5px solid #86efac;">
+          <div style="font-size:16px;margin-bottom:4px">⚡</div>
+          <div style="font-weight:700;margin-bottom:3px;color:#15803d">에너지·환경</div>
+          <div style="color:#666;line-height:1.5">태양광·풍력 보급, 산림 보호, 기후변화 적응, 조리용 연료 개선</div>
+        </div>
+        <div style="background:#f5f3ff;border-radius:7px;padding:10px;border:1.5px solid #c4b5fd;">
+          <div style="font-size:16px;margin-bottom:4px">📱</div>
+          <div style="font-weight:700;margin-bottom:3px;color:#6d28d9">디지털·경제</div>
+          <div style="color:#666;line-height:1.5">인터넷 인프라, 모바일 금융, 청년 창업 지원, 여성 경제 참여</div>
+        </div>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:#888;line-height:1.6">
+        ★ 위 분야 중 하나를 골라 구체적인 프로젝트를 직접 제안해도 좋고, 완전히 새로운 아이디어를 내도 됩니다.<br>
+        ★ 단, 현지 주민이 스스로 유지할 수 있는 방법을 함께 생각해보세요!
+      </div>
+    </div>
+
+    <!-- 역할별 발언 준비 -->
+    <p class="section-desc" style="margin-top:16px">회의 전, 내 역할에 해당하는 카드를 읽고 아래 준비 칸을 채워봅시다.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+
+      <div class="role-card r1" style="font-size:12px">
+        <span class="r-emoji">🌍</span>
+        <h4>국제NGO 활동가</h4>
+        <p style="margin-bottom:6px">현지 조사 결과를 갖고 왔습니다. 가장 시급한 문제와 외부에서 도울 수 있는 범위를 설명하는 역할.</p>
+        <div style="background:rgba(0,0,0,.05);border-radius:6px;padding:8px;font-size:11px;line-height:1.6">
+          <strong>💬 발언 힌트</strong><br>
+          "현지 조사 결과, 가장 큰 문제는 ___입니다."<br>
+          "저희가 지원할 수 있는 것은 ___이지만, ___은 현지에서 해결해야 합니다."<br>
+          "성공하려면 주민 스스로 ___해야 합니다."
+        </div>
+        <div style="margin-top:8px">
+          <div class="write-label">회의에서 내가 꼭 할 말:</div>
+          <div class="write-short"></div>
+          <div class="write-short"></div>
+        </div>
+      </div>
+
+      <div class="role-card r2" style="font-size:12px">
+        <span class="r-emoji">👴</span>
+        <h4>마을 대표</h4>
+        <p style="margin-bottom:6px">마을의 가장 큰 어른으로, 주민들의 진짜 필요와 우려를 대변합니다.</p>
+        <div style="background:rgba(0,0,0,.05);border-radius:6px;padding:8px;font-size:11px;line-height:1.6">
+          <strong>💬 발언 힌트</strong><br>
+          "우리 마을에서 가장 힘든 점은 ___입니다."<br>
+          "이전에 비슷한 지원이 있었는데 ___해서 실패했습니다."<br>
+          "주민들이 걱정하는 것은 ___입니다. 이 점을 꼭 고려해 주세요."
+        </div>
+        <div style="margin-top:8px">
+          <div class="write-label">회의에서 내가 꼭 할 말:</div>
+          <div class="write-short"></div>
+          <div class="write-short"></div>
+        </div>
+      </div>
+
+      <div class="role-card r3" style="font-size:12px">
+        <span class="r-emoji">🧑‍🎓</span>
+        <h4>현지 학생</h4>
+        <p style="margin-bottom:6px">또래 청소년의 목소리를 냅니다. 교육·기술·일자리 측면의 필요를 이야기합니다.</p>
+        <div style="background:rgba(0,0,0,.05);border-radius:6px;padding:8px;font-size:11px;line-height:1.6">
+          <strong>💬 발언 힌트</strong><br>
+          "저와 친구들에게 가장 필요한 것은 ___입니다."<br>
+          "이 프로젝트가 성공하면 나는 ___을 할 수 있을 것 같습니다."<br>
+          "하지만 솔직히 걱정되는 건 ___입니다."
+        </div>
+        <div style="margin-top:8px">
+          <div class="write-label">회의에서 내가 꼭 할 말:</div>
+          <div class="write-short"></div>
+          <div class="write-short"></div>
+        </div>
+      </div>
+
+      <div class="role-card r4" style="font-size:12px">
+        <span class="r-emoji">🏛️</span>
+        <h4>정부 담당자</h4>
+        <p style="margin-bottom:6px">나라 차원의 정책과 예산 상황을 설명하고, 이 사업이 오래 이어질 수 있는지 살펴봅니다.</p>
+        <div style="background:rgba(0,0,0,.05);border-radius:6px;padding:8px;font-size:11px;line-height:1.6">
+          <strong>💬 발언 힌트</strong><br>
+          "정부 입장에서 이 사업에서 가장 먼저 해결해야 할 것은 ___입니다."<br>
+          "예산 지원은 ___까지는 가능하지만, ___은 어렵습니다."<br>
+          "5년 후에도 이 사업이 유지되려면 ___이 필요합니다."
+        </div>
+        <div style="margin-top:8px">
+          <div class="write-label">회의에서 내가 꼭 할 말:</div>
+          <div class="write-short"></div>
+          <div class="write-short"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="write-box" style="background:#fffbeb;border-color:#fde68a">
+      <div class="write-q"><span class="q-num" style="background:#d97706">Q5</span>회의 전, 내 역할 입장에서 <strong>절대 양보하기 어려운 것</strong>과 <strong>협력하기 위해 양보할 수 있는 것</strong>을 미리 생각해 봅시다.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px">
+        <div>
+          <div class="write-label">🔴 양보하기 어려운 것 (꼭 지켜야 할 것)</div>
+          <div class="write-lines">
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+          </div>
+        </div>
+        <div>
+          <div class="write-label">🟢 협력을 위해 양보할 수 있는 것</div>
+          <div class="write-lines">
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-num">3 / 4</div>
+  </div>
+
+
+  <!-- ════════ PAGE 4 : 회의 + 협약서 + 성찰 ════════ -->
+  <div class="page" id="page4">
+
+    <div class="section-title" style="margin-top:0">
+      <span class="section-step step-wrap">STEP 03-②</span>
+      <h2>정리 — 모의 회의 진행 &amp; 개발협력 협약서</h2>
+    </div>
+
+    <!-- 회의 진행 메모 -->
+    <p class="section-desc">아래 순서로 모의 회의를 진행하면서, 각 단계에서 나온 중요한 내용을 간단히 메모하세요.</p>
+
+    <ul class="agenda-list">
+      <li>
+        <span class="a-step">1</span>
+        <div style="flex:1">
+          <span class="a-time">[5분]</span><strong>마을 대표 발언</strong> — 마을의 현황과 가장 시급한 문제 설명<br>
+          <div class="write-label" style="margin-top:4px">회의 메모:</div>
+          <div class="write-short"></div>
+        </div>
+      </li>
+      <li>
+        <span class="a-step">2</span>
+        <div style="flex:1">
+          <span class="a-time">[5분]</span><strong>각 역할 입장 발표</strong> — 자신의 관점에서 분석과 아이디어 제안<br>
+          <div class="write-label" style="margin-top:4px">가장 인상 깊었던 다른 역할의 발언:</div>
+          <div class="write-short"></div>
+        </div>
+      </li>
+      <li>
+        <span class="a-step">3</span>
+        <div style="flex:1">
+          <span class="a-time">[8분]</span><strong>협의·조율</strong> — 의견 차이를 좁히고 합의 도출<br>
+          <div class="write-label" style="margin-top:4px">가장 의견이 달랐던 부분과 어떻게 해결했는지:</div>
+          <div class="write-short"></div>
+          <div class="write-short"></div>
+        </div>
+      </li>
+      <li>
+        <span class="a-step">4</span>
+        <div style="flex:1">
+          <span class="a-time">[5분]</span><strong>협약서 작성</strong> — 아래 협약서 완성
+        </div>
+      </li>
+      <li>
+        <span class="a-step">5</span>
+        <div style="flex:1">
+          <span class="a-time">[5분]</span><strong>발표 &amp; 피드백</strong> — 다른 모둠과 결과 공유
+        </div>
+      </li>
+    </ul>
+
+    <!-- 지도: 대상 국가 표시 (D3.js TopoJSON) -->
+    <div style="background:#f8f9ff;border:1.5px solid #c7d2fe;border-radius:10px;padding:14px 16px;margin-bottom:14px;">
+      <div style="font-size:11px;font-weight:700;color:#3730a3;margin-bottom:4px">🗺️ 우리 모둠의 프로젝트 대상 지역을 지도에서 찾아봅시다</div>
+      <div style="font-size:11px;color:#666;margin-bottom:10px">나라를 <strong>클릭</strong>하면 선택됩니다. 선택한 나라 이름이 아래에 자동으로 표시돼요.</div>
+      <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;">
+        <!-- D3 지도 컨테이너 -->
+        <div style="flex-shrink:0;">
+          <svg id="africa-map" width="420" height="430" style="border:1px solid #e0e7ff;border-radius:8px;background:#dbeafe;display:block;cursor:pointer;"></svg>
+          <div style="display:flex;gap:8px;margin-top:5px;font-size:10px;flex-wrap:wrap;">
+            <span style="display:flex;align-items:center;gap:3px;"><span style="width:10px;height:10px;background:#f59e0b;border-radius:2px;display:inline-block"></span>클릭 선택</span>
+            <span style="display:flex;align-items:center;gap:3px;"><span style="width:10px;height:10px;background:#2563eb;border-radius:2px;display:inline-block"></span>케냐 사례</span>
+            <span style="display:flex;align-items:center;gap:3px;"><span style="width:10px;height:10px;background:#7c3aed;border-radius:2px;display:inline-block"></span>르완다 사례</span>
+          </div>
+        </div>
+        <!-- 오른쪽: 선택 결과 + 쓰기 칸 -->
+        <div style="flex:1;min-width:110px;font-size:12px;">
+          <div style="font-weight:700;margin-bottom:4px;color:#3730a3">✅ 선택한 나라</div>
+          <div id="selected-country" style="font-size:13px;font-weight:700;color:#1d4ed8;background:#eff6ff;border-radius:6px;padding:6px 10px;margin-bottom:10px;min-height:28px;">
+            (지도에서 나라를 클릭하세요)
+          </div>
+          <div style="font-weight:700;margin-bottom:6px;color:#3730a3">이 지역을 선택한 이유</div>
+          <div style="border-bottom:1.5px solid #c7d2fe;height:28px;margin-bottom:6px"></div>
+          <div style="border-bottom:1.5px solid #c7d2fe;height:28px;margin-bottom:10px"></div>
+          <div style="font-size:10.5px;color:#888;background:#eff6ff;border-radius:5px;padding:7px 9px;line-height:1.6;">
+            💡 르완다·케냐는 <strong>동아프리카</strong>에 있어요.<br>
+            솔라카우 태양광 사업도 케냐에서 시작됐어요.<br>
+            태양광 사업을 선택했다면 케냐를 클릭해봐요!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+    <script>
+    (function() {
+      const AFRICA_IDS = new Set([
+        12,24,72,86,108,120,132,140,148,174,175,180,204,231,232,
+        262,266,270,288,324,384,404,426,430,434,450,454,466,478,
+        480,504,508,516,562,566,624,630,638,646,678,686,694,706,
+        710,716,728,729,732,748,768,788,800,818,834,854,894
+      ]);
+      // 사례 강조: 르완다=646, 케냐=404
+      const CASE_COLOR = { 646: '#7c3aed', 404: '#2563eb' };
+
+      // 국가 ID → 한국어 이름
+      const COUNTRY_KR = {
+        12:'알제리',24:'앙골라',72:'보츠와나',108:'부룬디',120:'카메룬',
+        132:'카보베르데',140:'중앙아프리카',148:'차드',174:'코모로',
+        175:'마요트',180:'콩고민주공화국',204:'베냉',231:'에티오피아',
+        232:'에리트레아',262:'지부티',266:'가봉',270:'감비아',
+        288:'가나',324:'기니',384:'코트디부아르',404:'케냐',
+        426:'레소토',430:'라이베리아',434:'리비아',450:'마다가스카르',
+        454:'말라위',466:'말리',478:'모리타니',480:'모리셔스',
+        504:'모로코',508:'모잠비크',516:'나미비아',562:'니제르',
+        566:'나이지리아',624:'기니비사우',638:'레위니옹',646:'르완다',
+        678:'상투메프린시페',686:'세네갈',694:'시에라리온',706:'소말리아',
+        710:'남아프리카공화국',716:'짐바브웨',728:'남수단',729:'수단',
+        732:'서사하라',748:'에스와티니',768:'토고',788:'튀니지',
+        800:'우간다',818:'이집트',834:'탄자니아',854:'부르키나파소',894:'잠비아'
+      };
+
+      const LABELS_SHOW = {
+        818:'이집트', 504:'모로코', 566:'나이지리아', 710:'남아공',
+        231:'에티오피아', 834:'탄자니아', 180:'콩고민주공화국',
+        404:'케냐', 646:'르완다', 729:'수단', 466:'말리'
+      };
+
+      const W = 420, H = 430;
+      const svg = d3.select('#africa-map').attr('width', W).attr('height', H);
+
+      const projection = d3.geoMercator()
+        .center([18, 0])
+        .scale(280)
+        .translate([W / 2, H / 2 + 30]);
+
+      const path = d3.geoPath().projection(projection);
+
+      let selectedId = null;
+
+      fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+        .then(r => r.json())
+        .then(world => {
+          const countries = topojson.feature(world, world.objects.countries).features
+            .filter(f => AFRICA_IDS.has(+f.id));
+
+          // 국가 면
+          const paths = svg.selectAll('path.country')
+            .data(countries)
+            .enter().append('path')
+            .attr('class', 'country')
+            .attr('d', path)
+            .attr('fill', d => CASE_COLOR[+d.id] || '#bbf7d0')
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 0.7)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(event, d) {
+              if (+d.id !== selectedId) {
+                d3.select(this).attr('fill', CASE_COLOR[+d.id] ? d3.color(CASE_COLOR[+d.id]).brighter(0.4) : '#6ee7b7');
+              }
+            })
+            .on('mouseout', function(event, d) {
+              if (+d.id !== selectedId) {
+                d3.select(this).attr('fill', CASE_COLOR[+d.id] || '#bbf7d0');
+              }
+            })
+            .on('click', function(event, d) {
+              // 이전 선택 초기화
+              paths.attr('fill', dd => CASE_COLOR[+dd.id] || '#bbf7d0');
+              selectedId = +d.id;
+              d3.select(this).attr('fill', '#f59e0b');
+              const name = COUNTRY_KR[+d.id] || '알 수 없음';
+              document.getElementById('selected-country').textContent = '🌍 ' + name;
+            });
+
+          // 적도선
+          const equatorY = projection([0, 0])[1];
+          svg.append('line')
+            .attr('x1', 0).attr('x2', W)
+            .attr('y1', equatorY).attr('y2', equatorY)
+            .attr('stroke', '#ef4444').attr('stroke-width', 0.9)
+            .attr('stroke-dasharray', '5,3').attr('opacity', 0.55)
+            .style('pointer-events', 'none');
+          svg.append('text')
+            .attr('x', 4).attr('y', equatorY - 2)
+            .attr('font-size', 8).attr('fill', '#ef4444').attr('opacity', 0.8)
+            .attr('font-family', 'sans-serif').style('pointer-events', 'none').text('적도');
+
+          // 국가 라벨
+          countries.filter(d => LABELS_SHOW[+d.id]).forEach(d => {
+            const c = path.centroid(d);
+            if (!c || isNaN(c[0])) return;
+            const isBold = CASE_COLOR[+d.id];
+            svg.append('text')
+              .attr('x', c[0]).attr('y', c[1])
+              .attr('text-anchor', 'middle')
+              .attr('font-size', isBold ? 9 : 7.5)
+              .attr('font-weight', isBold ? 'bold' : 'normal')
+              .attr('fill', isBold ? '#fff' : '#374151')
+              .attr('font-family', 'Noto Sans KR, sans-serif')
+              .attr('paint-order', 'stroke')
+              .attr('stroke', isBold ? 'none' : '#fff')
+              .attr('stroke-width', 2)
+              .style('pointer-events', 'none')
+              .text(LABELS_SHOW[+d.id]);
+          });
+        })
+        .catch(() => {
+          svg.append('text').attr('x', W/2).attr('y', H/2)
+            .attr('text-anchor','middle').attr('font-size',11).attr('fill','#666')
+            .text('지도를 불러오는 중... (인터넷 연결 필요)');
+        });
+    })();
+    </script>
+
+    <!-- 협약서 -->
+    <div class="contract-box">
+      <div class="c-title">🤝 개발협력 미니 협약서</div>
+      <div class="contract-row">
+        <span class="c-label">프로젝트명</span>
+        <div class="c-line">
+          <div style="font-size:10px;color:#bbb;margin-bottom:2px">예) 케냐 포콧 마을 솔라카우 태양광 보급 프로젝트</div>
+          <div class="c-write-line"></div>
+        </div>
+      </div>
+      <div class="contract-row">
+        <span class="c-label">대상 지역</span>
+        <div class="c-line">
+          <div style="font-size:10px;color:#bbb;margin-bottom:2px">예) 케냐 북부 포콧 지역 (전기 미보급 농촌 마을, 약 200가구)</div>
+          <div class="c-write-line"></div>
+        </div>
+      </div>
+      <div class="contract-row">
+        <span class="c-label">핵심 목표</span>
+        <div class="c-line">
+          <div style="font-size:10px;color:#bbb;margin-bottom:2px">예) 2년 안에 마을 어린이 100명이 안정적으로 학교에 다닐 수 있도록 전력 문제 해결</div>
+          <div class="c-write-line"></div>
+          <div class="c-write-line"></div>
+        </div>
+      </div>
+      <div class="contract-row">
+        <span class="c-label">현지 주도<br>방안</span>
+        <div class="c-line">
+          <div style="font-size:10px;color:#bbb;margin-bottom:2px">예) 마을 주민 5명을 선발해 충전기 관리·수리 기술을 교육, 마을 자체 운영위원회 구성</div>
+          <div class="c-write-line"></div>
+          <div class="c-write-line"></div>
+        </div>
+      </div>
+      <div class="contract-row">
+        <span class="c-label">기술 알려주기<br>계획</span>
+        <div class="c-line">
+          <div style="font-size:10px;color:#bbb;margin-bottom:2px">예) 현지 교사에게 기기 사용법·간단 수리법 전수 → 교사가 학부모 교육 담당</div>
+          <div class="c-write-line"></div>
+          <div class="c-write-line"></div>
+        </div>
+      </div>
+      <div class="contract-row">
+        <span class="c-label">성공 판단<br>기준</span>
+        <div class="c-line">
+          <div style="font-size:10px;color:#bbb;margin-bottom:2px">예) 1년 후 마을 주민이 외부 도움 없이 스스로 유지·관리할 수 있는 상태</div>
+          <div class="c-write-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 성찰 -->
+    <div class="write-box" style="background:#f5f3ff;border-color:#c4b5fd;margin-top:14px">
+      <div class="write-q" style="color:#5b21b6"><span class="q-num" style="background:#7c3aed">Q6</span>이 수업 전과 후, 아프리카에 대한 나의 생각이 어떻게 달라졌나요? <span style="font-size:11px;font-weight:400;color:#7c3aed">(1페이지에 쓴 단어들을 떠올리며 비교해봐요)</span></div>
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin-top:6px">
+        <div>
+          <div class="write-label">수업 전 생각 <span style="font-size:10px;color:#aaa">(1페이지 단어 참고)</span></div>
+          <div class="write-lines">
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+          </div>
+        </div>
+        <div style="font-size:20px;color:#aaa;text-align:center">→</div>
+        <div>
+          <div class="write-label">수업 후 생각</div>
+          <div class="write-lines">
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="write-box" style="background:#f0fdf4;border-color:#86efac;">
+      <div class="write-q"><span class="q-num" style="background:#16a34a">Q6-추가</span>이 수업을 통해 아프리카를 어떤 관계로 바라보게 되었나요? 자신의 말로 써봅시다.</div>
+      <div class="write-lines">
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+
+    <div class="write-box">
+      <div class="write-q"><span class="q-num">Q7</span>세계시민으로서 내가 국제개발협력에 참여할 수 있는 방법을 한 가지 써봅시다.</div>
+      <div style="font-size:10px;color:#bbb;margin:4px 0 6px">예) 공정무역 제품 구매하기 / 국제 구호 단체 SNS 팔로우·공유하기 / 관련 직업(NGO·KOICA 활동가 등) 탐색하기 / 아프리카 문화·언어 배우기</div>
+      <div class="write-lines">
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+
+    <div class="page-num">4 / 4</div>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<!-- html2canvas (이미지 저장용) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+function saveAsPDF() {
+  window.print();
+}
+
+async function saveAsImage() {
+  const bar = document.querySelector('.save-bar');
+  bar.style.display = 'none';
+
+  const pages = document.querySelectorAll('.page');
+  const btn = document.querySelector('.save-btn.img');
+  btn.textContent = '⏳ 저장 중...';
+
+  for (let i = 0; i < pages.length; i++) {
+    const canvas = await html2canvas(pages[i], {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: '#ffffff'
+    });
+    const link = document.createElement('a');
+    link.download = `지구촌프로젝트_활동지_${i+1}of4.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    await new Promise(r => setTimeout(r, 400));
+  }
+
+  bar.style.display = 'flex';
+  btn.innerHTML = '🖼 이미지로 저장';
+}
+</script>
+</body>
+</html>
