@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>슬기로운 지구시민 — 수업 자료 모음</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --sdg-blue: #009EDB;
+  --sdg-green: #3F7E44;
+  --sdg-yellow: #FCC30B;
+  --sdg-red: #E5243B;
+  --sdg-orange: #FF6925;
+  --bg: #f5f7fa;
+  --text: #1a1a2e;
+  --muted: #5a6478;
+  --card-bg: #ffffff;
+  --radius: 14px;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── 헤더 ── */
+.hero {
+  background: linear-gradient(135deg, #0f2027 0%, #1a3a4a 50%, #0f3460 100%);
+  padding: 52px 24px 44px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.sdg-stripe {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 22px;
+}
+.sdg-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+}
+.hero-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: var(--sdg-blue);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.hero h1 {
+  font-size: 28px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+.hero h1 em {
+  color: var(--sdg-yellow);
+  font-style: normal;
+}
+.hero-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.8;
+  max-width: 520px;
+  margin: 0 auto 20px;
+}
+.hero-meta {
+  display: inline-flex;
+  gap: 16px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 16px;
+}
+.hero-meta span::before { content: '· '; }
+
+/* ── 본문 ── */
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 36px 20px 60px;
+}
+
+.section-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+/* ── 카드 그리드 ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+@media (max-width: 520px) {
+  .card-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 20px 18px 18px;
+  text-decoration: none;
+  color: inherit;
+  border: 1.5px solid #e8ecf2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent, #009EDB);
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+  border-color: var(--accent, #009EDB);
+}
+.card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent, #009EDB);
+  background: color-mix(in srgb, var(--accent, #009EDB) 10%, white);
+  border-radius: 20px;
+  padding: 3px 9px;
+  width: fit-content;
+}
+.card-emoji { font-size: 22px; line-height: 1; }
+.card-title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--text);
+}
+.card-desc {
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.65;
+  flex: 1;
+}
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 2px;
+}
+.tag {
+  font-size: 10px;
+  background: #f0f3f8;
+  color: #5a6478;
+  border-radius: 4px;
+  padding: 2px 7px;
+}
+.card-arrow {
+  font-size: 11px;
+  color: var(--accent, #009EDB);
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+/* ── SDGs 연결 박스 ── */
+.sdg-box {
+  background: #fff;
+  border-radius: var(--radius);
+  border: 1.5px solid #e8ecf2;
+  padding: 20px 18px;
+  margin-bottom: 36px;
+}
+.sdg-box-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.sdg-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.sdg-chip {
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 6px;
+  padding: 5px 10px;
+  line-height: 1.3;
+}
+
+/* ── 푸터 ── */
+.footer {
+  text-align: center;
+  font-size: 11px;
+  color: #aab0be;
+  padding-bottom: 30px;
+  line-height: 1.8;
+}
+.footer a { color: #aab0be; }
+</style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<div class="hero">
+  <div class="sdg-stripe">
+    <div class="sdg-dot" style="background:#E5243B"></div>
+    <div class="sdg-dot" style="background:#DDA63A"></div>
+    <div class="sdg-dot" style="background:#4C9F38"></div>
+    <div class="sdg-dot" style="background:#C5192D"></div>
+    <div class="sdg-dot" style="background:#FF3A21"></div>
+    <div class="sdg-dot" style="background:#26BDE2"></div>
+    <div class="sdg-dot" style="background:#FCC30B"></div>
+    <div class="sdg-dot" style="background:#A21942"></div>
+    <div class="sdg-dot" style="background:#FD6925"></div>
+    <div class="sdg-dot" style="background:#DD1367"></div>
+    <div class="sdg-dot" style="background:#FD9D24"></div>
+    <div class="sdg-dot" style="background:#BF8B2E"></div>
+    <div class="sdg-dot" style="background:#3F7E44"></div>
+    <div class="sdg-dot" style="background:#0A97D9"></div>
+    <div class="sdg-dot" style="background:#56C02B"></div>
+    <div class="sdg-dot" style="background:#00689D"></div>
+    <div class="sdg-dot" style="background:#19486A"></div>
+  </div>
+  <div class="hero-label">내곡중학교 사회·지리 수업 자료</div>
+  <h1>슬기로운 <em>지구시민</em> 수업</h1>
+  <p class="hero-desc">
+    SDGs(지속가능발전목표)와 연결된 중학교 사회·지리 수업 자료입니다.<br>
+    아래 활동지를 클릭해 수업에서 활용하세요.
+  </p>
+  <div class="hero-meta">
+    <span>2022 개정 교육과정</span>
+    <span>중학교 사회·지리</span>
+    <span>SDGs 연계</span>
+  </div>
+</div>
+
+<!-- 본문 -->
+<div class="container">
+
+  <div class="section-label">📂 학생 활동지</div>
+
+  <div class="card-grid">
+
+    <!-- 에너지 프로슈머 -->
+    <a class="card" href="energy/" style="--accent:#FF6925">
+      <div class="card-badge">⚡ SDG 7</div>
+      <div class="card-emoji">🔋</div>
+      <div class="card-title">에너지 프로슈머와<br>지속가능한 에너지</div>
+      <div class="card-desc">태양광·풍력 에너지의 생산자이자 소비자, 프로슈머 개념을 탐구합니다. 실제 사례와 기사를 통해 에너지 전환의 의미를 이해해봐요.</div>
+      <div class="card-tags">
+        <span class="tag">에너지전환</span>
+        <span class="tag">재생에너지</span>
+        <span class="tag">프로슈머</span>
+      </div>
+      <div class="card-arrow">활동지 열기 →</div>
+    </a>
+
+    <!-- 지구촌 프로젝트 -->
+    <a class="card" href="africa/" style="--accent:#3F7E44">
+      <div class="card-badge">🌍 SDG 17</div>
+      <div class="card-emoji">🤝</div>
+      <div class="card-title">지구촌 이웃과 함께<br>성장하는 프로젝트</div>
+      <div class="card-desc">아프리카의 도전과 성장을 탐구하고, 국제개발협력의 의미를 배웁니다. 모둠이 함께 개발협력 프로젝트를 기획해봐요.</div>
+      <div class="card-tags">
+        <span class="tag">국제개발협력</span>
+        <span class="tag">아프리카</span>
+        <span class="tag">세계시민</span>
+      </div>
+      <div class="card-arrow">활동지 열기 →</div>
+    </a>
+
+    <!-- 슬기로운 지구시민 -->
+    <a class="card" href="citizen/" style="--accent:#009EDB">
+      <div class="card-badge">🌐 SDG 11·13</div>
+      <div class="card-emoji">🌱</div>
+      <div class="card-title">슬기로운 지구시민<br>프로젝트</div>
+      <div class="card-desc">기후변화와 지속가능한 도시를 주제로 내가 살고 있는 지역에서 실천할 수 있는 지구시민 행동을 탐구합니다.</div>
+      <div class="card-tags">
+        <span class="tag">기후행동</span>
+        <span class="tag">지속가능도시</span>
+        <span class="tag">지역문제</span>
+      </div>
+      <div class="card-arrow">활동지 열기 →</div>
+    </a>
+
+    <!-- SDGs 융합수업 -->
+    <a class="card" href="sdgs/" style="--accent:#FCC30B">
+      <div class="card-badge">🎯 SDGs 전체</div>
+      <div class="card-emoji">📊</div>
+      <div class="card-title">SDGs 융합수업<br>성취기준 연계 자료</div>
+      <div class="card-desc">17개 SDGs와 2022 개정 교육과정 중학교 성취기준을 연결한 융합수업 자료입니다. 교사·학생 모두 활용 가능합니다.</div>
+      <div class="card-tags">
+        <span class="tag">SDGs 17개</span>
+        <span class="tag">성취기준연계</span>
+        <span class="tag">융합수업</span>
+      </div>
+      <div class="card-arrow">자료 열기 →</div>
+    </a>
+
+  </div>
+
+  <!-- SDGs 연결 -->
+  <div class="section-label">🎯 이 수업과 연결된 SDGs</div>
+  <div class="sdg-box">
+    <div class="sdg-box-title">수업에서 다루는 지속가능발전목표 (SDGs)</div>
+    <div class="sdg-chips">
+      <span class="sdg-chip" style="background:#DDA63A">SDG 2 기아종식</span>
+      <span class="sdg-chip" style="background:#4C9F38">SDG 3 건강과 웰빙</span>
+      <span class="sdg-chip" style="background:#C5192D">SDG 4 양질의 교육</span>
+      <span class="sdg-chip" style="background:#FF3A21">SDG 7 깨끗한 에너지</span>
+      <span class="sdg-chip" style="background:#A21942">SDG 10 불평등 감소</span>
+      <span class="sdg-chip" style="background:#FD6925">SDG 11 지속가능도시</span>
+      <span class="sdg-chip" style="background:#BF8B2E">SDG 12 책임있는 소비</span>
+      <span class="sdg-chip" style="background:#3F7E44">SDG 13 기후행동</span>
+      <span class="sdg-chip" style="background:#0A97D9">SDG 14 해양생태계</span>
+      <span class="sdg-chip" style="background:#56C02B">SDG 15 육상생태계</span>
+      <span class="sdg-chip" style="background:#19486A">SDG 17 글로벌 파트너십</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  내곡중학교 · 사회·지리 수업 자료<br>
+  2022 개정 교육과정 기반 · SDGs 연계 수업
+</div>
+
+</body>
+</html>
